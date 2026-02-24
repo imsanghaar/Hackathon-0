@@ -36,9 +36,5 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Logs (keep structure, ignore content)
-Logs/*.log
-Logs/processed_files.txt
-
 # Temporary files
 *.tmp
