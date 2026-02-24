@@ -1,0 +1,45 @@
+INVOICE
+=======
+
+Invoice Number: INV-2026-001
+Date: February 20, 2026
+Due Date: March 20, 2026
+
+Bill To:
+--------
+Quest Academy Larkana
+Attn: Accounts Department
+Larkana, Sindh, Pakistan
+
+From:
+-----
+Imam Sanghaar Chandio
+Karachi, Gulistan-e-Johar
+imamsanghaar@gmail.com
+
+Items:
+------
+| Description                    | Quantity | Rate    | Amount   |
+|--------------------------------|----------|---------|----------|
+| Web Development Services       | 40 hrs   | $50/hr  | $2,000   |
+| Prompt Engineering Consultation| 10 hrs   | $75/hr  | $750     |
+| AI System Setup                | 1        | $500    | $500     |
+|--------------------------------|----------|---------|----------|
+|                                        Subtotal:   | $3,250   |
+|                                        Tax (0%):   | $0       |
+|                                        TOTAL:      | $3,250   |
+
+Payment Terms:
+--------------
+- Payment due within 30 days
+- Bank transfer preferred
+- Late fee: 2% per month
+
+Notes:
+------
+Thank you for your business!
+Please reference invoice number when making payment.
+
+---
+Status: Pending Processing
+Priority: Medium
