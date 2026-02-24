@@ -144,6 +144,10 @@ bronze_tier/
 
 ## Developer
 
-**Imam Sanghaar Chandio**  
-*Prompt Engineer, Web Developer*  
+**Imam Sanghaar Chandio**
+*Prompt Engineer, Web Developer*
 Developer of this Local AI System
+
+## Contributors
+
+- **Qwen CLI** - AI Assistant
