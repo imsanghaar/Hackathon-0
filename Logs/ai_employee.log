@@ -1,0 +1,67 @@
+[2026-02-24 22:45:47] Scheduler lock acquired (PID: 2668)
+[2026-02-24 22:45:47] Scheduler started in once mode
+[2026-02-24 22:45:47] Starting scheduler cycle #1
+[2026-02-24 22:45:48] Running vault-watcher cycle
+[2026-02-24 22:45:48] Vault-watcher: 0 new files, 0 processed
+[2026-02-24 22:45:48] Running task-planner cycle
+[2026-02-24 22:45:48] Task-planner: 0 files, 0 plans
+[2026-02-24 22:45:48] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-24 22:45:48] Scheduler completed once mode
+[2026-02-24 22:45:48] Scheduler lock released (PID: 2668)
+[2026-02-24 22:47:37] Removing stale lock (PID: 12345)
+[2026-02-24 22:47:37] Scheduler lock acquired (PID: 2734)
+[2026-02-24 22:47:37] Scheduler started in once mode
+[2026-02-24 22:47:37] Starting scheduler cycle #1
+[2026-02-24 22:47:37] Running vault-watcher cycle
+[2026-02-24 22:47:37] Vault-watcher: 0 new files, 0 processed
+[2026-02-24 22:47:37] Running task-planner cycle
+[2026-02-24 22:47:38] Task-planner: 0 files, 0 plans
+[2026-02-24 22:47:38] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-24 22:47:38] Scheduler completed once mode
+[2026-02-24 22:47:38] Scheduler lock released (PID: 2734)
+[2026-02-24 22:49:18] Removing stale lock (PID: 12345)
+[2026-02-24 22:49:18] Scheduler lock acquired (PID: 2799)
+[2026-02-24 22:49:18] Scheduler started in once mode
+[2026-02-24 22:49:18] Starting scheduler cycle #1
+[2026-02-24 22:49:18] Running vault-watcher cycle
+[2026-02-24 22:49:18] Vault-watcher: 0 new files, 0 processed
+[2026-02-24 22:49:19] Running task-planner cycle
+[2026-02-24 22:49:19] Task-planner: 0 files, 0 plans
+[2026-02-24 22:49:19] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-24 22:49:19] Scheduler completed once mode
+[2026-02-24 22:49:19] Scheduler lock released (PID: 2799)
+[2026-02-24 22:50:03] Scheduler already running (PID: 2818)
+[2026-02-24 22:57:32] Scheduler lock acquired (PID: 12936)
+[2026-02-24 22:57:32] Scheduler started in daemon mode (interval=360s)
+[2026-02-24 22:57:32] Starting scheduler cycle #1
+[2026-02-24 22:57:32] Running vault-watcher cycle
+[2026-02-24 22:57:32] Vault-watcher: 0 new files, 0 processed
+[2026-02-24 22:57:32] Running task-planner cycle
+[2026-02-24 22:57:32] Task-planner: 0 files, 0 plans
+[2026-02-24 22:57:32] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-24 22:57:32] Next cycle in 360 seconds
+[2026-02-24 22:58:09] Received signal 2, shutting down...
+[2026-02-24 22:58:10] Scheduler stopped after 1 cycles
+[2026-02-24 22:58:10] Scheduler lock released (PID: 12936)
+[2026-02-25 13:07:57] Scheduler lock acquired (PID: 19036)
+[2026-02-25 13:07:57] Scheduler started in daemon mode (interval=360s)
+[2026-02-25 13:07:57] Starting scheduler cycle #1
+[2026-02-25 13:07:57] Running vault-watcher cycle
+[2026-02-25 13:07:57] Vault-watcher: 0 new files, 0 processed
+[2026-02-25 13:07:57] Running task-planner cycle
+[2026-02-25 13:07:57] Task-planner: 0 files, 0 plans
+[2026-02-25 13:07:57] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-25 13:07:57] Next cycle in 360 seconds
+[2026-02-25 13:08:01] Received signal 2, shutting down...
+[2026-02-25 13:08:01] Scheduler stopped after 1 cycles
+[2026-02-25 13:08:01] Scheduler lock released (PID: 19036)
+[2026-02-25 13:08:08] Scheduler lock acquired (PID: 17968)
+[2026-02-25 13:08:08] Scheduler started in once mode
+[2026-02-25 13:08:08] Starting scheduler cycle #1
+[2026-02-25 13:08:08] Running vault-watcher cycle
+[2026-02-25 13:08:08] Vault-watcher: 0 new files, 0 processed
+[2026-02-25 13:08:08] Running task-planner cycle
+[2026-02-25 13:08:08] Task-planner: 0 files, 0 plans
+[2026-02-25 13:08:08] Cycle complete - Inbox: 0, Processed: 0
+[2026-02-25 13:08:08] Scheduler completed once mode
+[2026-02-25 13:08:08] Scheduler lock released (PID: 17968)

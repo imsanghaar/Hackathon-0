@@ -1,0 +1,25 @@
+---
+type: execution_plan
+status: pending_approval
+priority: high
+created_at: 2026-02-24 22:30:00
+approval_required: true
+---
+
+# Test Approval Plan
+
+## Summary
+This is a test file for human approval workflow.
+
+## Proposed Actions
+1. Test approval detection
+2. Test file renaming
+
+---
+## APPROVAL SECTION (For Human Review)
+---
+
+**Status:** Approved
+**Reviewed by:** Test User
+**Date:** 2026-02-24
+**Comments:** Testing approval workflow

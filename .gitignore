@@ -38,4 +38,9 @@ Thumbs.db
 
 # Temporary files
 *.tmp
-"claude-code-skills-lab-main/"  
+"claude-code-skills-lab-main/"
+
+# Environment Variables (SECURITY: Never commit credentials)
+.env
+.env.local
+.env.*.local  

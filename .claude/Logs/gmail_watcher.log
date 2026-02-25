@@ -1,0 +1,10 @@
+[2026-02-25 13:25:30] ============================================================
+[2026-02-25 13:25:30] GMAIL WATCHER - Starting
+[2026-02-25 13:25:30] ============================================================
+[2026-02-25 13:25:30] Navigating to Gmail...
+[2026-02-25 13:25:34] ERROR: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+[2026-02-25 13:37:27] ============================================================
+[2026-02-25 13:37:27] GMAIL WATCHER - Starting
+[2026-02-25 13:37:27] ============================================================
+[2026-02-25 13:37:27] Navigating to Gmail...
+[2026-02-25 13:37:32] ERROR: MCP call failed: Expecting value: line 1 column 1 (char 0)

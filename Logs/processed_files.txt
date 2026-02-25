@@ -1,5 +1,5 @@
-clients_notes.txt
-team_feedback.md
-client_meeting_notes.txt
-invoice_2026_001.pdf
 office_pdfs.txt
+client_meeting_notes.txt
+clients_notes.txt
+invoice_2026_001.pdf
+team_feedback.md
