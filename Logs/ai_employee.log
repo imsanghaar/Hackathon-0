@@ -65,3 +65,252 @@
 [2026-02-25 13:08:08] Cycle complete - Inbox: 0, Processed: 0
 [2026-02-25 13:08:08] Scheduler completed once mode
 [2026-02-25 13:08:08] Scheduler lock released (PID: 17968)
+[2026-02-25 14:23:30] Scheduler lock acquired (PID: 2248)
+[2026-02-25 14:23:30] Scheduler started in daemon mode (interval=360s)
+[2026-02-25 14:23:30] Starting scheduler cycle #1
+[2026-02-25 14:23:30] Running vault-watcher cycle
+[2026-02-25 14:23:30] Vault-watcher: 0 new files, 0 processed
+[2026-02-25 14:23:30] Running gmail-watcher cycle
+[2026-02-25 14:23:30] ERROR: Daemon error: name 'subprocess' is not defined
+[2026-02-25 14:23:30] Scheduler stopped after 1 cycles
+[2026-02-25 14:23:30] Scheduler lock released (PID: 2248)
+[2026-02-25 14:27:08] Scheduler lock acquired (PID: 14328)
+[2026-02-25 14:27:08] Scheduler started in once mode
+[2026-02-25 14:27:08] ERROR: Scheduler failed: 'charmap' codec can't encode characters in position 2-61: character maps to <undefined>
+[2026-02-25 14:27:08] Scheduler lock released (PID: 14328)
+[2026-02-25 14:33:17] Scheduler lock acquired (PID: 16616)
+[2026-02-25 14:33:17] Scheduler started in once mode
+[2026-02-25 14:33:17] Starting scheduler cycle #1
+[2026-02-25 14:33:17] Running vault-watcher cycle
+[2026-02-25 14:33:17] Vault-watcher: 0 new files, 0 processed
+[2026-02-25 14:33:17] Running gmail-watcher cycle
+[2026-02-25 14:33:17] ERROR: Scheduler failed: name 'subprocess' is not defined
+[2026-02-25 14:33:17] Scheduler lock released (PID: 16616)
+[2026-02-25 14:37:00] Scheduler lock acquired (PID: 6812)
+[2026-02-25 14:37:00] Scheduler started in once mode
+[2026-02-25 14:37:00] Starting scheduler cycle #1
+[2026-02-25 14:37:00] Running vault-watcher cycle
+[2026-02-25 14:37:00] Vault-watcher: 0 new files, 0 processed
+[2026-02-25 14:37:00] Running gmail-watcher cycle
+[2026-02-25 14:37:06] Gmail-watcher error: Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 148, in call_tool
+    response = self._parse_response(resp.read().decode('utf-8'))
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 102, in _parse_response
+    return json.loads(body)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 421, in <module>
+    main()
+    ~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 417, in main
+    watcher.run()
+    ~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 150, in call_tool
+    raise Exception(f"MCP call failed: {e}")
+Exception: MCP call failed: Expecting value: line 1 column 1 (char 0)
+
+[2026-02-25 14:37:06] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-02-25 14:37:06] Running task-planner cycle
+[2026-02-25 14:37:06] Task-planner: 0 files, 0 plans
+[2026-02-25 14:37:06] Cycle complete - Inbox: 0, Gmail: 0, Processed: 0
+[2026-02-25 14:37:06] Scheduler completed once mode
+[2026-02-25 14:37:06] Scheduler lock released (PID: 6812)
+[2026-02-28 22:16:53] Scheduler lock acquired (PID: 9452)
+[2026-02-28 22:16:53] Scheduler started in once mode
+[2026-02-28 22:16:53] Starting scheduler cycle #1
+[2026-02-28 22:16:53] Running vault-watcher cycle
+[2026-02-28 22:16:53] Vault-watcher: 0 new files, 0 processed
+[2026-02-28 22:16:53] Running gmail-watcher cycle
+[2026-02-28 22:16:58] Gmail-watcher error: Traceback (most recent call last):
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1321, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 870, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 855, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 487, in open
+    response = self._open(req, data)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 464, in _call_chain
+    result = func(*args)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1350, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1324, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 421, in <module>
+    main()
+    ~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 417, in main
+    watcher.run()
+    ~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+[2026-02-28 22:16:58] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-02-28 22:16:58] Running task-planner cycle
+[2026-02-28 22:16:58] Task-planner: 0 files, 0 plans
+[2026-02-28 22:16:58] Cycle complete - Inbox: 0, Gmail: 0, Processed: 0
+[2026-02-28 22:16:58] Scheduler completed once mode
+[2026-02-28 22:16:58] Scheduler lock released (PID: 9452)
+[2026-02-28 22:17:40] Scheduler lock acquired (PID: 8936)
+[2026-02-28 22:17:40] Scheduler started in once mode
+[2026-02-28 22:17:40] Starting scheduler cycle #1
+[2026-02-28 22:17:40] Running vault-watcher cycle
+[2026-02-28 22:17:40] ERROR: Watcher error processing 'test_client_request.md': cannot import name 'create_task_file' from 'watch_inbox' (E:\ai_employee\[Bronze_Tier](Silver_Tier)\scripts\watch_inbox.py)
+[2026-02-28 22:17:40] Vault-watcher: 1 new files, 0 processed
+[2026-02-28 22:17:40] Running gmail-watcher cycle
+[2026-02-28 22:17:45] Gmail-watcher error: Traceback (most recent call last):
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1321, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 870, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 855, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 487, in open
+    response = self._open(req, data)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 464, in _call_chain
+    result = func(*args)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1350, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1324, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 421, in <module>
+    main()
+    ~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 417, in main
+    watcher.run()
+    ~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\[Bronze_Tier](Silver_Tier)\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+[2026-02-28 22:17:45] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-02-28 22:17:45] Running task-planner cycle
+[2026-02-28 22:17:45] Task-planner: 1 files, 1 plans
+[2026-02-28 22:17:45] Cycle complete - Inbox: 1, Gmail: 0, Processed: 1
+[2026-02-28 22:17:45] Scheduler completed once mode
+[2026-02-28 22:17:45] Scheduler lock released (PID: 8936)

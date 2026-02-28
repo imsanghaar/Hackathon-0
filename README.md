@@ -945,38 +945,231 @@ Full test results: [`scripts/tests.md`](scripts/tests.md)
 
 ---
 
-## 📁 Silver Tier Folder Structure
+## 📁 Complete Folder Structure
+
+### High-Level Overview
 
 ```
-Hackathon-0/
+Hackathon-0/  (Silver Tier)
 │
-├── .claude/skills/
-│   ├── vault-watcher/           # [Silver] Monitor Inbox
-│   ├── task-planner/            # [Silver] Analyze & plan
-│   ├── human-approval/          # [Silver] Human sign-off
-│   └── schedular-silvertier/    # [Silver] Scheduler
+├── 📁 .claude/                      # AI Agent Skills & Configuration
+│   ├── skills/                      # 11+ Agent Skills
+│   │   ├── vault-watcher/           # 🥈 Monitor Inbox for new files
+│   │   ├── task-planner/            # 🥈 Analyze & create execution plans
+│   │   ├── human-approval/          # 🥈 Human-in-the-loop approval
+│   │   ├── schedular-silvertier/    # 🥈 Scheduler daemon
+│   │   ├── linkedin-auto-post/      # 🥈 Auto-post to LinkedIn
+│   │   ├── gmail-watcher/           # 🥈 Monitor Gmail inbox
+│   │   ├── vault-file-manager/      # 🥈 File operations
+│   │   ├── make-plan-for-tasks/     # 🥈 Strategic planning
+│   │   ├── process-tasks/           # 🥈 Execute pending tasks
+│   │   ├── requests-approval/       # 🥈 Check approval status
+│   │   └── ...                      # Additional skills
+│   └── Logs/                        # Skill execution logs
 │
-├── AI_Employee_Vault/           # [Silver] Vault structure
-│   ├── Inbox/                   # Drop .md files here
-│   ├── Needs_Action/            # Plans pending approval
-│   └── Done/                    # Completed items
+├── 📁 AI_Employee_Vault/            # 🏛️ Task Management Vault
+│   ├── Inbox/                       # 📥 Drop new .md files here
+│   ├── Needs_Action/                # ⏳ Plans pending execution
+│   ├── Needs_Approval/              # 🔒 Awaiting human approval
+│   └── Done/                        # ✅ Completed tasks archive
 │
-├── scripts/                     # [Silver] All scripts
-│   ├── run_ai_employee.py       # Main scheduler
-│   ├── watch_inbox.py           # Vault watcher
-│   ├── task_planner.py          # Task planner
-│   ├── requests-approval.py     # Approval checker
-│   └── test_implementations.py  # Test suite
+├── 📁 scripts/                      # 🔧 Python Scripts
+│   ├── run_ai_employee.py           # 🎯 Main scheduler daemon
+│   ├── watch_inbox.py               # 👁️ Vault watcher
+│   ├── task_planner.py              # 🧠 Task analyzer
+│   ├── requests-approval.py         # ✅ Approval checker
+│   └── test_implementations.py      # 🧪 Test suite
 │
-├── Logs/
-│   ├── ai_employee.log          # [Silver] Scheduler log
-│   ├── action.log               # [Silver] All actions
-│   └── scheduler.lock           # [Silver] Lock file
+├── 📁 Logs/                         # 📊 System Logs
+│   ├── ai_employee.log              # 📝 Scheduler activity
+│   ├── action.log                   # 📝 All system actions
+│   ├── planner_processed.txt        # 📝 Processed files tracker
+│   └── scheduler.lock               # 🔒 Prevents duplicate runs
 │
-└── [Bronze Tier Files...]
-    ├── ai_employee.py
-    ├── file_watcher.py
-    └── ...
+├── 📁 Plans/                        # 📋 Strategic Plans
+│   ├── Agent_Skill_Make_Plan.md     # Planning skill template
+│   ├── Agent_Skill_Process_Tasks.md # Processing skill template
+│   └── task_template.md             # Task file template
+│
+├── 📁 Inbox/                        # 📥 (Bronze) Legacy inbox
+├── 📁 Done/                         # ✅ (Bronze) Legacy completed
+│
+└── 📄 Core Files
+    ├── ai_employee.py               # 🎮 Interactive CLI (Bronze)
+    ├── file_watcher.py              # 👁️ File watcher (Bronze)
+    ├── interactive_cli.py           # 💬 CLI interface
+    ├── load_env.py                  # 🔐 Environment loader
+    ├── log_manager.py               # 🔄 Log rotation
+    ├── Dashboard.md                 # 📊 Task overview
+    ├── System_Log.md                # 📝 Activity log
+    ├── Company_Handbook.md          # 📜 Guidelines
+    └── README.md                    # 📖 This documentation
+```
+
+### Detailed AI_Employee_Vault Structure
+
+```
+📁 AI_Employee_Vault/
+│
+├── 📁 Inbox/
+│   └── *.md                         # Drop new task files here
+│                                    # → Auto-detected by vault-watcher
+│                                    # → Processed by task-planner
+│                                    # → Moved to Needs_Action/ or Done/
+│
+├── 📁 Needs_Action/
+│   ├── Plan_*.md                    # Auto-generated execution plans
+│   │                                # Format: Plan_<task>_<timestamp>.md
+│   │
+│   └── *.approved                   # Approved task files
+│                                    # Status: Approved by human
+│
+├── 📁 Needs_Approval/
+│   └── *.md                         # Tasks awaiting human approval
+│                                    # Requires "Status: Approved"
+│
+└── 📁 Done/
+    ├── test_client_request.md       # ✅ Completed tasks
+    └── test_gmail_skill.md          # ✅ Archive of processed items
+```
+
+### Skills Directory Structure
+
+```
+📁 .claude/skills/
+│
+├── 🥈 SILVER TIER SKILLS (7 new)
+│   │
+│   ├── vault-watcher/
+│   │   ├── SKILL.md                 # Skill documentation
+│   │   └── scripts/
+│   │       └── watch_inbox.py       # Monitors Inbox/ every 10-30s
+│   │
+│   ├── task-planner/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   │       └── task_planner.py      # Analyzes & creates plans
+│   │
+│   ├── human-approval/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   │       └── requests-approval.py # Checks approval status
+│   │
+│   ├── schedular-silvertier/
+│   │   └── SKILL.md                 # Scheduler daemon skill
+│   │
+│   ├── linkedin-auto-post/
+│   │   ├── SKILL.md
+│   │   └── linkedin_auto.py         # Auto-post to LinkedIn
+│   │
+│   ├── gmail-watcher/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   │       └── watch_gmail.py       # Monitor Gmail via MCP
+│   │
+│   └── vault-file-manager/
+│       ├── SKILL.md
+│       └── scripts/
+│           └── move_task.py         # File operations
+│
+└── 🥉 BRONZE TIER SKILLS (4 base)
+    │
+    ├── make-plan-for-tasks/
+    │   └── SKILL.md                 # Strategic planning
+    │
+    ├── process-tasks/
+    │   └── SKILL.md                 # Execute tasks
+    │
+    ├── requests-approval/
+    │   └── SKILL.md                 # Approval workflow
+    │
+    └── vault-watcher/
+        └── SKILL.md                 # Basic file watching
+```
+
+### Logs & Monitoring Structure
+
+```
+📁 Logs/
+│
+├── ai_employee.log                  # 📝 Scheduler daemon logs
+│                                    # - Cycle execution
+│                                    # - Watcher results
+│                                    # - Planner results
+│                                    # - Errors & warnings
+│                                    # Auto-rotates at 4MB
+│
+├── action.log                       # 📝 All system actions
+│                                    # - Watcher started/stopped
+│                                    # - Files detected
+│                                    # - Tasks created
+│                                    # - Approval status
+│
+├── planner_processed.txt            # 📝 Processed files tracker
+│                                    # - Prevents duplicate processing
+│                                    # - Format: filename|timestamp
+│
+└── scheduler.lock                   # 🔒 Lock file
+                                     # - Prevents duplicate daemon instances
+                                     # - Auto-cleaned on exit
+```
+
+---
+
+## 🔗 Quick Reference Links
+
+### 📖 Documentation
+
+| Document | Description | Link |
+|----------|-------------|------|
+| **Silver Tier Verification** | Complete requirements checklist | [`SILVER_TIER_VERIFICATION.md`](SILVER_TIER_VERIFICATION.md) |
+| **Silver Tier Analysis** | Requirements analysis & gaps | [`SILVER_TIER_ANALYSIS.md`](SILVER_TIER_ANALYSIS.md) |
+| **Silver Tier Final Status** | Implementation status report | [`SILVER_TIER_FINAL_STATUS.md`](SILVER_TIER_FINAL_STATUS.md) |
+| **MCP Integration** | MCP server setup guide | [`MCP_INTEGRATION.md`](MCP_INTEGRATION.md) |
+| **Skills Setup** | Agent skills configuration | [`SKILLS_SETUP.md`](SKILLS_SETUP.md) |
+| **Test Results** | Full test suite results | [`scripts/tests.md`](scripts/tests.md) |
+| **Plan Workflow Test** | Plan.md generation test report | [`PLAN_WORKFLOW_TEST_REPORT.md`](PLAN_WORKFLOW_TEST_REPORT.md) |
+
+### 🎯 Key Folders
+
+| Folder | Purpose | Quick Link |
+|--------|---------|------------|
+| `AI_Employee_Vault/Inbox/` | Drop new tasks here | [Open Folder](AI_Employee_Vault/Inbox/) |
+| `AI_Employee_Vault/Needs_Action/` | Pending execution plans | [Open Folder](AI_Employee_Vault/Needs_Action/) |
+| `AI_Employee_Vault/Done/` | Completed tasks archive | [Open Folder](AI_Employee_Vault/Done/) |
+| `.claude/skills/` | AI agent skills | [Open Folder](.claude/skills/) |
+| `scripts/` | Python scripts | [Open Folder](scripts/) |
+| `Logs/` | System logs | [Open Folder](Logs/) |
+
+### 🛠️ Commands Cheat Sheet
+
+```bash
+# Start scheduler (daemon mode - continuous)
+python scripts/run_ai_employee.py --daemon
+
+# Start scheduler (single cycle)
+python scripts/run_ai_employee.py --once
+
+# Check scheduler status
+python scripts/run_ai_employee.py --status
+
+# Run vault watcher only
+python scripts/watch_inbox.py
+
+# Run task planner only
+python scripts/task_planner.py
+
+# Check approval status
+python scripts/requests-approval.py
+
+# Run test suite
+python scripts/test_implementations.py
+
+# Interactive CLI (Bronze)
+python ai_employee.py
+
+# Live dashboard mode
+python ai_employee.py --dashboard
 ```
 
 ---
@@ -989,6 +1182,9 @@ Hackathon-0/
 | Scheduler won't start | Remove lock: `del Logs\scheduler.lock` or use `--force` |
 | Approval not detected | Use `**Status:** Approved` exactly |
 | Log file too large | Auto-rotates at 4MB threshold |
+| MCP connection refused | Start Playwright MCP: `npm run dev` in playwright-mcp folder |
+| Gmail watcher fails | Check EMAIL_ADDRESS and EMAIL_PASSWORD in .env |
+| LinkedIn post fails | Check LINKEDIN_EMAIL and LINKEDIN_PASSWORD in .env |
 
 ---
 

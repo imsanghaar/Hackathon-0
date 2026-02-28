@@ -25,6 +25,7 @@ import sys
 import time
 import signal
 import argparse
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any
@@ -49,6 +50,7 @@ except ImportError:
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.resolve()
 BASE_DIR = SCRIPT_DIR.parent
+SKILL_DIR = BASE_DIR / ".claude" / "skills"
 
 # Define folder paths
 VAULT_DIR = BASE_DIR / "AI_Employee_Vault"
@@ -340,27 +342,87 @@ def run_vault_watcher() -> Dict[str, Any]:
 def run_task_planner() -> Dict[str, Any]:
     """
     Run task-planner cycle.
-    
+
     Returns:
         dict: Statistics from planner cycle
     """
     try:
         write_log("Running task-planner cycle")
-        
+
         # Import and run planner
         sys.path.insert(0, str(SCRIPT_DIR))
         from task_planner import TaskPlanner
-        
+
         # Run planner (dry_run=False to actually process)
         planner = TaskPlanner(dry_run=False)
         stats = planner.process_inbox()
-        
+
         write_log(f"Task-planner: {stats['files_processed']} files, {stats['plans_created']} plans")
         return stats
-        
+
     except Exception as e:
         log_error(f"Task-planner cycle failed: {e}")
         return {"files_processed": 0, "plans_created": 0, "files_moved": 0, "errors": 1}
+
+
+# =============================================================================
+# GMAIL WATCHER INTEGRATION
+# =============================================================================
+
+def run_gmail_watcher() -> Dict[str, Any]:
+    """
+    Run gmail-watcher cycle to check for new emails.
+
+    Returns:
+        dict: Statistics from gmail-watcher cycle
+    """
+    try:
+        write_log("Running gmail-watcher cycle")
+
+        # Import and run gmail watcher
+        gmail_watcher_script = SKILL_DIR / "gmail-watcher" / "scripts" / "watch_gmail.py"
+        
+        if not gmail_watcher_script.exists():
+            write_log("Gmail-watcher script not found")
+            return {"emails_checked": 0, "tasks_created": 0, "errors": 0}
+
+        # Run gmail watcher as subprocess (non-interactive)
+        result = subprocess.run(
+            [sys.executable, str(gmail_watcher_script)],
+            capture_output=True,
+            text=True,
+            timeout=60,
+            cwd=str(gmail_watcher_script.parent)
+        )
+
+        # Parse output for stats
+        emails_checked = 0
+        tasks_created = 0
+        
+        for line in result.stdout.split('\n'):
+            if 'Checked' in line and 'emails' in line:
+                try:
+                    emails_checked = int(line.split(':')[1].strip().split()[0])
+                except:
+                    pass
+            if 'Created' in line and 'tasks' in line:
+                try:
+                    tasks_created = int(line.split(':')[1].strip().split()[0])
+                except:
+                    pass
+
+        if result.returncode != 0 and result.stderr:
+            write_log(f"Gmail-watcher error: {result.stderr}")
+
+        write_log(f"Gmail-watcher: {emails_checked} emails checked, {tasks_created} tasks created")
+        return {"emails_checked": emails_checked, "tasks_created": tasks_created, "errors": 0}
+
+    except subprocess.TimeoutExpired:
+        log_error("Gmail-watcher timeout (60s)")
+        return {"emails_checked": 0, "tasks_created": 0, "errors": 1}
+    except Exception as e:
+        log_error(f"Gmail-watcher cycle failed: {e}")
+        return {"emails_checked": 0, "tasks_created": 0, "errors": 1}
 
 
 # =============================================================================
@@ -422,19 +484,19 @@ def get_scheduler_status() -> Dict[str, Any]:
 def print_status():
     """Print scheduler status"""
     status = get_scheduler_status()
-    
+
     running_str = f"Running (PID: {status['pid']})" if status["running"] else "Not running"
-    
+
     banner = f"""
-╔══════════════════════════════════════════════════════════╗
-║           📊 AI Employee Scheduler Status                 ║
-╠══════════════════════════════════════════════════════════╣
-║  Scheduler Status: {running_str:<34} ║
-║  Inbox Files: {status['inbox_count']:<41} ║
-║  Pending Tasks: {status['pending_tasks']:<39} ║
-║  Last Cycle: {status['last_cycle']:<42} ║
-║  Log Size: {status['log_size']:<44} ║
-╚══════════════════════════════════════════════════════════╝
++==========================================================+
+|           AI Employee Scheduler Status                   |
++==========================================================+
+|  Scheduler Status: {running_str:<34} |
+|  Inbox Files: {status['inbox_count']:<41} |
+|  Pending Tasks: {status['pending_tasks']:<39} |
+|  Last Cycle: {status['last_cycle']:<42} |
+|  Log Size: {status['log_size']:<44} |
++==========================================================+
 """
     print(banner)
 
@@ -457,39 +519,44 @@ class Scheduler:
         """Run a single scheduler cycle"""
         self.cycle_count += 1
         write_log(f"Starting scheduler cycle #{self.cycle_count}")
-        
+
         print(f"\n[CYCLE {self.cycle_count}] Running at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        
-        # Run vault-watcher
-        print("[1/2] Running vault-watcher...")
+
+        # [1/3] Run vault-watcher
+        print("[1/3] Running vault-watcher...")
         watcher_stats = run_vault_watcher()
         print(f"      Inbox: {watcher_stats['inbox_count']} files, {watcher_stats['new_files']} new")
-        
-        # Run task-planner
-        print("[2/2] Running task-planner...")
+
+        # [2/3] Run gmail-watcher (check for new emails)
+        print("[2/3] Running gmail-watcher...")
+        gmail_stats = run_gmail_watcher()
+        print(f"      Gmail: {gmail_stats['emails_checked']} checked, {gmail_stats['tasks_created']} new tasks")
+
+        # [3/3] Run task-planner
+        print("[3/3] Running task-planner...")
         planner_stats = run_task_planner()
         print(f"      Processed: {planner_stats['files_processed']}, Plans: {planner_stats['plans_created']}")
-        
-        write_log(f"Cycle complete - Inbox: {watcher_stats['inbox_count']}, Processed: {planner_stats['files_processed']}")
+
+        write_log(f"Cycle complete - Inbox: {watcher_stats['inbox_count']}, Gmail: {gmail_stats['emails_checked']}, Processed: {planner_stats['files_processed']}")
         print(f"[CYCLE {self.cycle_count}] Complete")
     
     def run_daemon(self) -> None:
         """Run scheduler in daemon mode (continuous)"""
         self.running = True
-        
+
         # Setup signal handlers
         signal.signal(signal.SIGINT, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
-        
+
         print(f"""
-╔══════════════════════════════════════════════════════════╗
-║           🤖 AI Employee Scheduler - Silver Tier          ║
-╠══════════════════════════════════════════════════════════╣
-║  Mode: Daemon (continuous)                               ║
-║  Interval: {self.interval / 60:.1f} minutes ({self.interval} seconds){' ' * 25} ║
-║  Log File: logs/ai_employee.log                          ║
-║  Max Log Size: 4 MB                                      ║
-╚══════════════════════════════════════════════════════════╝
++==========================================================+
+|           AI Employee Scheduler - Silver Tier            |
++==========================================================+
+|  Mode: Daemon (continuous)                               |
+|  Interval: {self.interval / 60:.1f} minutes ({self.interval} seconds){' ' * 25} |
+|  Log File: logs/ai_employee.log                          |
+|  Max Log Size: 4 MB                                      |
++==========================================================+
 
 Press Ctrl+C to stop
 """)
@@ -530,10 +597,10 @@ Press Ctrl+C to stop
 def print_banner():
     """Print startup banner"""
     print(f"""
-╔══════════════════════════════════════════════════════════╗
-║           🤖 AI Employee Scheduler - Silver Tier          ║
-║                    By ISC                                 ║
-╚══════════════════════════════════════════════════════════╝
++==========================================================+
+|           AI Employee Scheduler - Silver Tier            |
+|                    By ISC                                |
++==========================================================+
 """)
 
 
@@ -601,12 +668,12 @@ def main():
             # Once mode
             write_log("Scheduler started in once mode")
             print(f"""
-╔══════════════════════════════════════════════════════════╗
-║           🤖 AI Employee Scheduler - Silver Tier          ║
-╠══════════════════════════════════════════════════════════╣
-║  Mode: Once (single execution)                           ║
-║  Log File: logs/ai_employee.log                          ║
-╚══════════════════════════════════════════════════════════╝
++==========================================================+
+|           AI Employee Scheduler - Silver Tier            |
++==========================================================+
+|  Mode: Once (single execution)                           |
+|  Log File: logs/ai_employee.log                          |
++==========================================================+
 """)
             scheduler = Scheduler()
             scheduler.run_cycle()

@@ -205,47 +205,82 @@ class GmailWatcher:
     def navigate_to_gmail(self):
         """Navigate to Gmail"""
         self._log("Navigating to Gmail...")
-        self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com"})
-        self.mcp.call_tool("browser_wait_for", {"time": 3000})
-    
+        self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+        self.mcp.call_tool("browser_wait_for", {"time": 5000})
+
     def check_logged_in(self) -> bool:
         """Check if user is logged into Gmail"""
         try:
             snapshot = self.mcp.call_tool("browser_snapshot")
-            # Check for Gmail interface elements
-            return True  # Simplified - in production, check snapshot content
+            # Check for Gmail interface elements like inbox count
+            snapshot_text = str(snapshot)
+            if "Inbox" in snapshot_text and ("unread" in snapshot_text.lower() or "mail.google.com" in snapshot_text):
+                return True
+            return False
         except:
             return False
-    
+
     def get_unread_emails(self) -> list:
-        """Get list of unread emails"""
+        """Get list of unread emails from Gmail snapshot"""
         self._log("Checking for unread emails...")
-        
+
         try:
             # Navigate to inbox
-            self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/#inbox"})
+            self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
             self.mcp.call_tool("browser_wait_for", {"time": 3000})
-            
+
             # Get snapshot to find emails
             snapshot = self.mcp.call_tool("browser_snapshot")
+            snapshot_text = str(snapshot)
             
-            # Extract emails from snapshot (simplified)
-            # In production, parse snapshot to find email rows
+            # Parse snapshot for email rows
+            # Gmail snapshot contains rows with format like:
+            # row "unread, Sender Name, Subject, Time, Preview text.."
             emails = []
             
-            # Example extraction (would need real parsing)
-            # emails = [
-            #     {
-            #         "id": "email_001",
-            #         "subject": "Project Update",
-            #         "from": "client@example.com",
-            #         "date": "2026-02-25 13:45:00",
-            #         "preview": "Hi, I need an update..."
-            #     }
-            # ]
-            
+            # Find all email rows in snapshot
+            lines = snapshot_text.split('\n')
+            for line in lines:
+                if 'row' in line.lower() and 'unread' in line.lower():
+                    try:
+                        # Extract email info from row
+                        # Format: row "unread, Sender, Subject, Time, Preview"
+                        parts = line.split(',')
+                        if len(parts) >= 4:
+                            sender = parts[1].strip().strip('"').strip()
+                            subject = parts[2].strip().strip('"').strip()
+                            
+                            # Get time (usually 3rd or 4th element)
+                            time_str = ""
+                            for p in parts[3:5]:
+                                p = p.strip().strip('"').strip()
+                                if any(c.isdigit() for c in p) or ':' in p or 'AM' in p or 'PM' in p:
+                                    time_str = p
+                                    break
+                            
+                            # Get preview from remaining text
+                            preview_parts = parts[4:] if len(parts) > 4 else parts[3:]
+                            preview = ' '.join(p.strip().strip('"').strip() for p in preview_parts)[:200]
+                            
+                            # Create unique ID from subject+sender
+                            email_id = f"{sender}_{subject}"[:100]
+                            
+                            emails.append({
+                                "id": email_id,
+                                "subject": subject if subject else "(No Subject)",
+                                "from": sender if sender else "Unknown",
+                                "date": time_str if time_str else datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                                "preview": preview if preview else "No preview available"
+                            })
+                            
+                            self._log(f"Found email: {subject} from {sender}")
+                    except Exception as e:
+                        self._log(f"Error parsing email row: {e}")
+                        continue
+
+            self._log(f"Found {len(emails)} unread emails")
             return emails
-            
+
         except Exception as e:
             self._log(f"Error getting emails: {e}")
             return []
