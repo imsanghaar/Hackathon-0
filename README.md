@@ -6,12 +6,20 @@
 **By Imam Sanghaar Chandio & Qwen Code**
 
 [![Status](https://img.shields.io/badge/status-complete-brightgreen)](https://github.com/imsanghaar/Hackathon-0)
+[![Tier](https://img.shields.io/badge/tier-bronze%20%7C%20silver-orange)](https://github.com/imsanghaar/Hackathon-0)
 [![Python](https://img.shields.io/badge/python-3.x-blue)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ### 🏷️ Tags
 
-`status:complete` `tier:bronze` `tier:silver` `automation` `ai-employee` `digital-fte` `workflow` `task-management`
+[![status:complete](https://img.shields.io/badge/status-complete-brightgreen)](https://github.com/imsanghaar/Hackathon-0)
+[![tier:bronze](https://img.shields.io/badge/tier-bronze-orange)](https://github.com/imsanghaar/Hackathon-0)
+[![tier:silver](https://img.shields.io/badge/tier-silver-silver)](https://github.com/imsanghaar/Hackathon-0)
+[![automation](https://img.shields.io/badge/-automation-blue)](https://github.com/imsanghaar/Hackathon-0)
+[![ai-employee](https://img.shields.io/badge/-ai--employee-purple)](https://github.com/imsanghaar/Hackathon-0)
+[![digital-fte](https://img.shields.io/badge/-digital--FTE-green)](https://github.com/imsanghaar/Hackathon-0)
+[![workflow](https://img.shields.io/badge/-workflow-yellow)](https://github.com/imsanghaar/Hackathon-0)
+[![task-management](https://img.shields.io/badge/-task--management-red)](https://github.com/imsanghaar/Hackathon-0)
 
 ---
 
