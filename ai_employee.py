@@ -33,6 +33,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Callable
 
+# Ensure UTF-8 encoding for Windows console
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 # Rich library for beautiful terminal UI
 from rich.console import Console
 from rich.panel import Panel
