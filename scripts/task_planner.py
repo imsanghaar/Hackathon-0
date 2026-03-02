@@ -142,10 +142,10 @@ def parse_frontmatter(content: str) -> Dict[str, Any]:
 
 def analyze_file_content(filepath: Path) -> Dict[str, Any]:
     """
-    Analyze a markdown file and extract planning information.
+    Analyze a markdown file and extract planning information using CoT reasoning.
     
     Returns:
-        dict: Analysis results including frontmatter, content summary, and suggested steps
+        dict: Analysis results including frontmatter, reasoning, and suggested steps
     """
     try:
         content = filepath.read_text(encoding='utf-8')
@@ -158,6 +158,9 @@ def analyze_file_content(filepath: Path) -> Dict[str, Any]:
             if len(parts) >= 3:
                 body = parts[2].strip()
         
+        # Chain-of-Thought Reasoning Simulation
+        reasoning = perform_cot_reasoning(body, frontmatter)
+        
         # Analyze content for action items
         analysis = {
             "filename": filepath.name,
@@ -169,7 +172,8 @@ def analyze_file_content(filepath: Path) -> Dict[str, Any]:
             "status": frontmatter.get("status", "pending"),
             "created_at": frontmatter.get("created_at", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
             "related_files": frontmatter.get("related_files", ""),
-            "suggested_steps": generate_suggested_steps(body, frontmatter)
+            "reasoning": reasoning,
+            "suggested_steps": generate_suggested_steps(body, frontmatter, reasoning)
         }
         
         return analysis
@@ -186,109 +190,69 @@ def analyze_file_content(filepath: Path) -> Dict[str, Any]:
             "status": "pending",
             "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "related_files": "",
-            "suggested_steps": ["Error: Could not analyze file content"],
+            "reasoning": "Error during analysis deliberation.",
+            "suggested_steps": [{"action": "Error", "details": str(e), "output": "N/A"}],
             "error": str(e)
         }
 
 
-def generate_suggested_steps(content: str, frontmatter: Dict[str, Any]) -> List[Dict[str, str]]:
-    """Generate suggested execution steps based on content analysis"""
+def perform_cot_reasoning(content: str, frontmatter: Dict[str, Any]) -> str:
+    """
+    Simulate Chain-of-Thought reasoning to derive a better plan.
+    """
+    task_type = frontmatter.get("type", "general").lower()
+    priority = frontmatter.get("priority", "medium").lower()
+    
+    reasoning_steps = [
+        f"1. **Initial Observation**: Received a {task_type} task with {priority} priority.",
+        f"2. **Content Analysis**: Scanning {len(content)} characters of input data."
+    ]
+    
+    # Add specific logic based on content
+    if "urgent" in content.lower() or "asap" in content.lower():
+        reasoning_steps.append("3. **Constraint Identification**: Found 'urgent/ASAP' keywords. Escalating focus on speed.")
+    
+    if task_type in ["file_review", "review"]:
+        reasoning_steps.append("3. **Strategic Approach**: This is a data-heavy task. I need to focus on extraction and summary accuracy.")
+        reasoning_steps.append("4. **Potential Risks**: Information overload or missing subtle nuances in the document.")
+    elif task_type in ["client_request", "client"]:
+        reasoning_steps.append("3. **Strategic Approach**: High-stakes communication. I must ensure the response is professional and addresses all points.")
+        reasoning_steps.append("4. **Potential Risks**: Misinterpreting client intent or missing a critical deadline.")
+    else:
+        reasoning_steps.append("3. **Strategic Approach**: General task detected. Applying standard operational procedures.")
+    
+    reasoning_steps.append("5. **Conclusion**: Formulating a multi-step plan to minimize risks and ensure completion criteria are met.")
+    
+    return "\n".join(reasoning_steps)
+
+
+def generate_suggested_steps(content: str, frontmatter: Dict[str, Any], reasoning: str) -> List[Dict[str, str]]:
+    """Generate suggested execution steps based on content and reasoning analysis"""
     steps = []
     task_type = frontmatter.get("type", "general").lower()
     
-    # Type-specific step generation
+    # Logic enhanced by reasoning
+    is_urgent = "urgency detected" in reasoning.lower()
+    
     if task_type in ["file_review", "review"]:
         steps = [
-            {
-                "action": "Review file content",
-                "details": "Read and understand the file's purpose and key information",
-                "output": "Summary of file contents"
-            },
-            {
-                "action": "Categorize and tag",
-                "details": "Identify file type, add relevant tags for future reference",
-                "output": "Categorized file with metadata"
-            },
-            {
-                "action": "Determine next action",
-                "details": "Decide if file needs archiving, further processing, or response",
-                "output": "Action decision documented"
-            }
+            {"action": "Deep Scan", "details": "Analyze content for key business metrics and insights.", "output": "Extracted insights"},
+            {"action": "Synthesize Summary", "details": "Create a concise overview based on the scan.", "output": "Executive summary"},
+            {"action": "Categorization", "details": "Tag the document for the CEO briefing database.", "output": "Tagged metadata"}
         ]
     elif task_type in ["client_request", "client"]:
         steps = [
-            {
-                "action": "Analyze client requirements",
-                "details": "Extract key deliverables, deadlines, and expectations",
-                "output": "Requirements list"
-            },
-            {
-                "action": "Draft response or action plan",
-                "details": "Create initial response addressing client needs",
-                "output": "Response draft in Drafts/"
-            },
-            {
-                "action": "Schedule follow-up",
-                "details": "Set reminders and calendar events based on deadlines",
-                "output": "Calendar entries created"
-            }
-        ]
-    elif task_type in ["document", "documentation"]:
-        steps = [
-            {
-                "action": "Review document structure",
-                "details": "Analyze document organization and completeness",
-                "output": "Structure assessment"
-            },
-            {
-                "action": "Process document content",
-                "details": "Extract, transform, or integrate document data",
-                "output": "Processed content"
-            },
-            {
-                "action": "Archive with metadata",
-                "details": "Store in appropriate location with proper indexing",
-                "output": "Archived document"
-            }
-        ]
-    elif task_type in ["task", "action_item"]:
-        steps = [
-            {
-                "action": "Understand task requirements",
-                "details": "Parse task description and identify success criteria",
-                "output": "Task breakdown"
-            },
-            {
-                "action": "Execute task steps",
-                "details": "Perform required actions in logical order",
-                "output": "Task completion"
-            },
-            {
-                "action": "Verify and document",
-                "details": "Confirm task completion and record outcomes",
-                "output": "Completion report"
-            }
+            {"action": "Requirements Mapping", "details": "List all explicit and implicit client needs.", "output": "Requirements matrix"},
+            {"action": "Draft Response", "details": "Generate a professional draft in the Outbox.", "output": "Email draft"},
+            {"action": "Review & Approve", "details": "Move to Needs_Approval for human verification.", "output": "Approval request"}
         ]
     else:
-        # Generic steps for unknown types
         steps = [
-            {
-                "action": "Review content",
-                "details": "Read and understand the file's purpose",
-                "output": "Content summary"
-            },
-            {
-                "action": "Identify required actions",
-                "details": "Determine what needs to be done based on content",
-                "output": "Action list"
-            },
-            {
-                "action": "Execute and archive",
-                "details": "Complete actions and move to appropriate folder",
-                "output": "Completed and archived"
-            }
+            {"action": "Initial Analysis", "details": "Deconstruct the request into actionable parts.", "output": "Actionable task list"},
+            {"action": "Execute Core Task", "details": "Perform the primary action requested.", "output": "Task result"},
+            {"action": "Verification", "details": "Verify output against initial requirements.", "output": "Verification report"}
         ]
-    
+        
     return steps
 
 
@@ -314,7 +278,7 @@ def generate_plan_content(analysis: Dict[str, Any]) -> str:
     resources = [
         "- [ ] Access to source file",
         "- [ ] Required permissions verified",
-        "- [ ] Backup location available"
+        "- [ ] External skills (Gmail/LinkedIn) availability checked"
     ]
     
     # Build risks section
@@ -322,9 +286,9 @@ def generate_plan_content(analysis: Dict[str, Any]) -> str:
     if analysis.get("priority") == "high":
         risks.append("- ⚠️ High priority - expedite processing")
     if analysis.get("content_length", 0) > 5000:
-        risks.append("- ℹ️ Large file - may require additional processing time")
+        risks.append("- ℹ️ Large file - may require chunked processing")
     if analysis.get("type") == "unknown":
-        risks.append("- ⚠️ Unknown file type - manual review may be needed")
+        risks.append("- ⚠️ Unknown file type - manual supervision advised")
     if not risks:
         risks.append("- ✅ No significant risks identified")
     
@@ -338,38 +302,42 @@ source_file: {analysis.get('filename', 'unknown')}
 
 # Plan: {analysis.get('filename', 'Unknown File')}
 
-## Source Analysis
+## 🧠 Reasoning (Chain-of-Thought)
+
+{analysis.get('reasoning', 'No reasoning provided.')}
+
+## 📊 Source Analysis
 
 - **File:** {analysis.get('filename', 'unknown')}
 - **Type:** {analysis.get('type', 'general')}
 - **Priority:** {analysis.get('priority', 'medium')}
 - **Detected:** {analysis.get('created_at', 'unknown')}
 
-## Content Preview
+## 📝 Content Preview
 
 ```
 {analysis.get('content_preview', 'No preview available')}
 ```
 
-## Step-by-Step Execution Plan
+## 🛠️ Step-by-Step Execution Plan
 {steps_md}
 
-## Required Resources
+## 📦 Required Resources
 
 {chr(10).join(resources)}
 
-## Risks & Considerations
+## ⚠️ Risks & Considerations
 
 {chr(10).join(risks)}
 
-## Completion Criteria
+## ✅ Completion Criteria
 
-- [ ] All steps executed
-- [ ] Output verified
-- [ ] Files archived appropriately
+- [ ] All steps executed according to plan
+- [ ] Output verified for quality
+- [ ] Files archived in AI_Employee_Vault/Done
 
 ---
-*Generated by Task Planner on {timestamp}*
+*Generated by Task Planner v2.0 (Enhanced Intelligence) on {timestamp}*
 """
     
     return plan_content

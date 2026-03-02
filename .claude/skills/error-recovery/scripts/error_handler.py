@@ -43,8 +43,8 @@ INBOX_FOLDER = BASE_DIR / "AI_Employee_Vault" / "Inbox"
 NEEDS_ACTION_FOLDER = BASE_DIR / "Needs_Action"
 
 # Retry settings
-RETRY_DELAY_MINUTES = 5
-MAX_RETRY_ATTEMPTS = 2
+INITIAL_RETRY_DELAY_MINUTES = 5
+MAX_RETRY_ATTEMPTS = 3  # Increased for better recovery
 
 # Ensure directories exist
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -293,7 +293,7 @@ class ErrorHandler:
         stack_trace: str
     ) -> str:
         """
-        Add a file to the retry queue.
+        Add a file to the retry queue with exponential backoff.
         
         Args:
             filename: File to retry
@@ -313,15 +313,17 @@ class ErrorHandler:
                 if item.get("filename") == filename:
                     return "already_queued"
             
-            # Add to queue
-            retry_time = datetime.now() + timedelta(minutes=RETRY_DELAY_MINUTES)
+            # Add to queue with initial backoff
+            attempts = 1
+            delay = INITIAL_RETRY_DELAY_MINUTES * (3 ** (attempts - 1))
+            retry_time = datetime.now() + timedelta(minutes=delay)
             
             queue.setdefault("pending_retries", []).append({
                 "filename": filename,
                 "source": source,
                 "category": category,
                 "retry_time": retry_time.isoformat(),
-                "attempts": 1,
+                "attempts": attempts,
                 "max_attempts": MAX_RETRY_ATTEMPTS,
                 "stack_trace": stack_trace,
                 "created_at": datetime.now().isoformat()
@@ -330,7 +332,7 @@ class ErrorHandler:
             # Save queue
             self.save_retry_queue(queue)
             
-            return f"queued_for_retry_at: {retry_time.strftime('%Y-%m-%d %H:%M:%S')}"
+            return f"queued_for_retry_at: {retry_time.strftime('%Y-%m-%d %H:%M:%S')} (Attempt 1)"
             
         except Exception as e:
             return f"queue_failed: {str(e)}"
@@ -355,7 +357,7 @@ class ErrorHandler:
     
     def process_retry_queue(self) -> Dict[str, Any]:
         """
-        Process the retry queue and retry files that are due.
+        Process the retry queue and retry files that are due with exponential backoff.
         
         Returns:
             dict: Statistics about retry processing
@@ -383,24 +385,28 @@ class ErrorHandler:
                     # Time to retry
                     stats["retried"] += 1
                     
-                    # Check if max attempts reached
-                    if item["attempts"] >= item["max_attempts"]:
-                        stats["max_attempts_reached"] += 1
-                        # Move to permanent errors
-                        self.move_to_errors(item["filename"])
-                        continue
-                    
                     # Attempt retry - move back to inbox
                     result = self._attempt_retry(item)
                     
                     if result["success"]:
                         stats["success"] += 1
+                        print(f"[SUCCESS] {item['filename']} retried successfully")
                     else:
                         stats["failed"] += 1
                         # Increment attempts and requeue
                         item["attempts"] += 1
-                        item["retry_time"] = (now + timedelta(minutes=RETRY_DELAY_MINUTES)).isoformat()
-                        still_pending.append(item)
+                        
+                        if item["attempts"] > item["max_attempts"]:
+                            stats["max_attempts_reached"] += 1
+                            print(f"[MAX-ATTEMPTS] {item['filename']} failed all retries")
+                            # Move to permanent errors
+                            self.move_to_errors(item["filename"])
+                        else:
+                            # Exponential backoff: 5, 15, 45, etc.
+                            delay = INITIAL_RETRY_DELAY_MINUTES * (3 ** (item["attempts"] - 1))
+                            item["retry_time"] = (now + timedelta(minutes=delay)).isoformat()
+                            still_pending.append(item)
+                            print(f"[RE-QUEUED] {item['filename']} failed, next retry in {delay} mins")
                 else:
                     # Not yet due
                     still_pending.append(item)
