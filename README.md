@@ -1,7 +1,6 @@
-# 🤖 AI Employee System (Digital FTE)
+# 🤖 AI Employee (Digital FTE) - The Autonomous Business Agent
 
-> **A Full-Time Equivalent (FTE) Digital Employee Powered by AI**  
-> An autonomous automation system that monitors communication channels, creates execution plans, and processes tasks using specialized AI Agent Skills—working 24/7 with human-in-the-loop oversight.
+> **An advanced, multi-tier autonomous framework designed to function as a Full-Time Equivalent (FTE) Digital Employee. It monitors communication channels, executes strategic plans, and handles business workflows 24/7 with human-in-the-loop oversight.**
 
 <div align="center">
 
@@ -12,306 +11,127 @@
 [![Python: 3.8+](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge)](https://python.org)
 [![MCP: Enabled](https://img.shields.io/badge/MCP-Enabled-orange?style=for-the-badge)](https://modelcontextprotocol.io)
 
-**🏆 GOLD TIER IMPLEMENTED**
+**🏆 GOLD TIER FULLY IMPLEMENTED**
 
-[Quick Start](#-quick-start) • [Documentation](#-documentation) • [Team](#-development-team)
+[Quick Start](#-quick-start) • [Tiers & Features](#-tiered-architecture) • [Architecture](#-agent-skills-architecture) • [Contributors](#-development--contributions)
 
 </div>
 
 ---
 
-## 📋 Overview
+## 🌟 Overview
 
-The AI Employee System is a **multi-tier automation framework** designed to handle business workflows autonomously. From simple file monitoring to complex browser-based tasks like LinkedIn posting and Gmail management, the system operates through a modular **"Agent Skill"** architecture.
+The **AI Employee** is a sophisticated automation system that bridges the gap between simple scripts and full autonomous agents. Built on a modular **"Agent Skill"** architecture, it handles everything from mundane file movements to complex strategic reasoning and multi-platform interactions (Gmail, LinkedIn, etc.).
 
-### Key Capabilities
+---
 
-- **📊 Multi-Channel Monitoring** — Watches local folders, Gmail, and social media for new tasks
-- **🔄 Strategic Planning** — Automatically generates detailed `Plan.md` files for complex requests
-- **🤖 Autonomous Execution** — Ralph Wiggum loop for multi-step task completion
-- **🛡️ Error Recovery** — Automatic retry and graceful degradation on failures
-- **📧 Email & Social** — LinkedIn automation, Gmail integration, and social media logging
-- **👤 Human-in-the-Loop** — Sensitive actions require explicit human approval via the vault
-- **📈 CEO Briefing** — Weekly business audit with comprehensive reports
+## 🏗️ Tiered Architecture
+
+The system is organized into three progressive tiers, each adding a layer of intelligence and autonomy.
+
+### 🥉 Bronze Tier: Core Foundation
+*The bedrock of the AI Employee, providing the essential infrastructure for task management.*
+
+- **Features**:
+  - **Modular Vault**: Organized folder structure (`Inbox`, `Needs_Action`, `Done`).
+  - **Task Monitoring**: Basic file system watching for incoming requests.
+  - **Interactive CLI**: Command-line interface for manual task control.
+  - **Foundation Skills**: Core skills for file management and basic task execution.
+- **📁 Core Location**: [`AI_Employee_Vault/`](AI_Employee_Vault/)
+
+### 🥈 Silver Tier: Advanced Automation
+*Enhanced connectivity and strategic reasoning for business operations.*
+
+- **Features**:
+  - **Multi-Channel Watchers**: Monitoring Gmail and LinkedIn for incoming business opportunities.
+  - **Strategic Planning**: Generation of detailed `Plan.md` files for complex task execution.
+  - **LinkedIn Automation**: Automated posting to generate leads and engagement.
+  - **MCP Integration**: Model Context Protocol servers for external tool interactions.
+  - **Human-in-the-Loop**: Safe approval workflows for sensitive business actions.
+- **📁 Core Locations**: [`scripts/`](scripts/), [`mcp/`](mcp/)
+
+### 🥇 Gold Tier: Fully Autonomous Employee
+*The pinnacle of autonomy, featuring self-healing loops and executive reporting.*
+
+- **Features**:
+  - **Ralph Wiggum Loop**: Continuous autonomous execution of multi-step task chains.
+  - **Error Recovery System**: Automatic retry logic and graceful failure handling.
+  - **CEO Weekly Briefing**: Automated generation of comprehensive business audit reports.
+  - **Accounting Management**: Tracking of financial records and social media logging.
+  - **Daemon Mode**: 24/7 background operation with robust logging and status tracking.
+- **📁 Core Locations**: [`.claude/skills/`](.claude/skills/), [`AI_Employee_Vault/Reports/`](AI_Employee_Vault/Reports/)
+
+---
+
+## 📊 Feature Comparison
+
+| Feature | Bronze | Silver | Gold |
+| :--- | :---: | :---: | :---: |
+| File Watching | ✅ | ✅ | ✅ |
+| Interactive CLI | ✅ | ✅ | ✅ |
+| Vault Organization | ✅ | ✅ | ✅ |
+| LinkedIn Posting | ❌ | ✅ | ✅ |
+| Strategic Planning (`Plan.md`) | ❌ | ✅ | ✅ |
+| Gmail Integration | ❌ | ✅ | ✅ |
+| Human Approval Workflow | ❌ | ✅ | ✅ |
+| **Autonomous Loop (Ralph Wiggum)** | ❌ | ❌ | ✅ |
+| **Automated Error Recovery** | ❌ | ❌ | ✅ |
+| **Weekly CEO Audit Reports** | ❌ | ❌ | ✅ |
+
+---
+
+## 🛠️ Agent Skills Architecture
+
+All AI functionality is decoupled into **16 specialized Agent Skills** located in `.claude/skills/`. This allows for easy extension and high reliability.
+
+- **Communication**: `gmail-watcher`, `gmail-send`, `linkedin-post`, `linkedin-auto-post`
+- **Reasoning**: `task-planner`, `make-plan-for-tasks`, `ralph-wiggum`
+- **Operations**: `vault-file-manager`, `human-approval`, `error-recovery`
+- **Analytics**: `ceo-briefing`, `social-summary`, `accounting-manager`
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
+### 1. Prerequisites
 - Python 3.8+
-- Node.js 16+ (for MCP server)
-- Chrome/Edge browser (for Playwright)
-- Git
+- Node.js 16+ (for MCP)
+- Playwright (for LinkedIn automation)
 
-### Installation
-
+### 2. Setup
 ```bash
 # Clone the repository
 git clone https://github.com/imsanghaar/Hackathon-0.git
 cd Hackathon-0
 
-# Install Python dependencies
+# Install dependencies
 pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-# Edit .env with your Gmail and LinkedIn credentials
+cp .env.example .env  # Configure your credentials
 ```
 
-### Start the System
-
+### 3. Run the System
 ```bash
-# Start MCP Server (required for browser automation)
-npx @playwright/mcp@latest --port 8808 --shared-browser-context &
-
-# Start the main scheduler (Gold Tier - Full Autonomous Mode)
+# Start the Gold Tier Autonomous Daemon
 python scripts/run_ai_employee.py --daemon
 ```
 
-This runs the complete cycle every 6 minutes:
-1. **Error Recovery** — Process retry queue
-2. **Vault Watcher** — Check for new files
-3. **Gmail Watcher** — Monitor emails
-4. **Task Planner** — Create execution plans
-5. **Ralph Wiggum** — Autonomous task execution
-6. **CEO Briefing** — Weekly reports (on schedule)
-
 ---
 
-## 🥇 Gold Tier: Autonomous Employee
+## 🤝 Development & Contributions
 
-### Features Implemented
+This project is a collaborative effort between human ingenuity and advanced AI.
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Error Recovery System | ✅ | Automatic retry, graceful degradation |
-| Ralph Wiggum Autonomous Loop | ✅ | Iterative multi-step task execution |
-| Weekly CEO Briefing | ✅ | Business + Accounting audit reports |
-| Social Media Summary | ✅ | LinkedIn activity logging |
-| Comprehensive Audit Logging | ✅ | Multi-domain logging with rotation |
-| 16 Agent Skills | ✅ | All AI functionality modularized |
-
-### Folder Structure
-
-```
-Hackathon-0/
-├── .claude/skills/           # All 16 Agent Skills
-│   ├── ceo-briefing/         # Weekly CEO reports
-│   ├── error-recovery/       # Error handling & retry
-│   ├── ralph-wiggum/         # Autonomous loop
-│   ├── social-summary/       # Social media logging
-│   ├── gmail-watcher/        # Gmail monitoring
-│   ├── gmail-send/           # Email sending
-│   ├── linkedin-auto-post/   # LinkedIn automation
-│   ├── linkedin-post/        # LinkedIn posting
-│   ├── human-approval/       # Approval workflow
-│   ├── task-planner/         # Plan.md generation
-│   ├── make-plan-for-tasks/  # Task planning
-│   ├── process-tasks/        # Task execution
-│   ├── vault-watcher/        # Vault monitoring
-│   ├── vault-file-manager/   # File operations
-│   ├── accounting-manager/   # Accounting tracking
-│   └── schedular-silvertier/ # Scheduler daemon
-├── AI_Employee_Vault/        # Gold Tier Vault
-│   ├── Inbox/                # New tasks
-│   ├── Needs_Action/         # Pending tasks
-│   ├── Needs_Approval/       # Awaiting approval
-│   ├── Done/                 # Completed tasks
-│   ├── Errors/               # Failed tasks (error recovery)
-│   ├── Reports/              # CEO Weekly Briefing
-│   ├── Reposts/              # Social media logs
-│   └── Accounting/           # Financial records
-├── Plans/                    # Generated execution plans
-├── Logs/                     # Comprehensive audit logs
-└── mcp/                      # MCP Servers
-    └── business-mcp/         # Business actions server
-```
-
-### Gold Tier Commands
-
-| Command | Description |
-|---------|-------------|
-| `python scripts/run_ai_employee.py --daemon` | Start full autonomous loop |
-| `python scripts/run_ai_employee.py --once` | Run single cycle |
-| `python scripts/run_ai_employee.py --status` | Check scheduler status |
-| `python ralph_wiggum.py --run` | Run autonomous task loop |
-| `python error_recovery.py --check` | Process error retry queue |
-| `python generate_ceo_briefing.py` | Generate weekly report |
-| `python social_summary.py --log -c "Content"` | Log social media post |
-| `python task_planner.py` | Create execution plans |
-| `python watch_gmail.py --watch` | Monitor Gmail continuously |
-| `python auto_post.py` | Execute LinkedIn posts |
-
-### Monitoring & Audit
-
-```bash
-# View Dashboard
-cat Dashboard.md
-
-# View System Log
-cat System_Log.md
-
-# View CEO Weekly Briefing
-cat AI_Employee_Vault/Reports/CEO_Weekly.md
-
-# View Error Log
-cat Logs/errors.log
-
-# View Social Media Log
-cat AI_Employee_Vault/Reposts/Social_Log.md
-
-# Check Active Loops
-python .claude/skills/ralph-wiggum/scripts/ralph_wiggum.py --status
-```
-
----
-
-## 🥈 Silver Tier: Advanced Automation
-
-### Features
-
-- ✅ All Bronze Requirements
-- ✅ Multiple Watchers (Gmail + File + Vault)
-- ✅ LinkedIn Auto-Post for Business
-- ✅ Plan.md Generation (Strategic Reasoning)
-- ✅ MCP Server (External Actions)
-- ✅ Human-in-the-Loop Approval
-- ✅ Scheduling (Daemon with Lock Files)
-
-### Running Silver Tier
-
-```bash
-# Start MCP Server
-npx @playwright/mcp@latest --port 8808 --shared-browser-context &
-
-# Gmail Watcher
-python .claude/skills/gmail-watcher/scripts/watch_gmail.py --watch --interval 300
-
-# LinkedIn Auto-Post
-python .claude/skills/linkedin-auto-post/scripts/auto_post.py
-
-# Approval Checker
-python .claude/skills/human-approval/scripts/request_approval.py --check
-
-# Task Planner
-python scripts/task_planner.py
-```
-
----
-
-## 🥉 Bronze Tier: Core Foundation
-
-### Features
-
-- ✅ Obsidian Vault (Dashboard.md + Company_Handbook.md)
-- ✅ File Watcher Script
-- ✅ Basic Folders (/Inbox, /Needs_Action, /Done)
-- ✅ 16 Agent Skills Modularized
-
-### Running Bronze Tier
-
-```bash
-# Interactive CLI
-python ai_employee.py
-
-# File Watcher
-python scripts/watch_inbox.py
-
-# Live Dashboard
-python ai_employee.py --dashboard
-```
-
----
-
-## 🛠️ Architecture: Agent Skills
-
-All AI functionality is decoupled into **16 Skills** located in `.claude/skills/`. Each skill includes a `SKILL.md` defining its behavior and Python scripts for execution.
-
-| Skill | Purpose | Tier |
-|-------|---------|------|
-| `gmail-watcher` | Monitors Gmail for task-related emails | Silver |
-| `gmail-send` | Sends emails via SMTP | Silver |
-| `linkedin-post` | Automates LinkedIn content publishing | Silver |
-| `linkedin-auto-post` | Scans and posts LinkedIn requests | Silver |
-| `task-planner` | Creates step-by-step execution plans | Silver |
-| `make-plan-for-tasks` | Plan.md file generator | Silver |
-| `process-tasks` | Task execution engine | Bronze |
-| `human-approval` | Manages approval/rejection workflow | Silver |
-| `vault-watcher` | Monitors vault folders | Bronze |
-| `vault-file-manager` | Handles file movements | Bronze |
-| `error-recovery` | Error handling and retry system | Gold |
-| `ralph-wiggum` | Autonomous multi-step loop | Gold |
-| `ceo-briefing` | Weekly business audit reports | Gold |
-| `social-summary` | Social media activity logging | Gold |
-| `accounting-manager` | Financial tracking | Gold |
-| `schedular-silvertier` | Production scheduler daemon | Silver |
-
----
-
-## 📊 Documentation
-
-| Document | Description |
-|----------|-------------|
-| **[Dashboard.md](Dashboard.md)** | Real-time task statistics and system health |
-| **[Company_Handbook.md](Company_Handbook.md)** | Operational guidelines and tier definitions |
-| **[MCP_INTEGRATION.md](MCP_INTEGRATION.md)** | Model Context Protocol setup guide |
-| **[System_Log.md](System_Log.md)** | Chronological log of autonomous actions |
-| **[CEO_Weekly.md](AI_Employee_Vault/Reports/CEO_Weekly.md)** | Weekly business audit report |
-| **[Social_Log.md](AI_Employee_Vault/Reposts/Social_Log.md)** | Social media activity archive |
-
----
-
-## 📁 Key File Locations
-
-| Component | Location |
-|-----------|----------|
-| All Agent Skills | `.claude/skills/` |
-| Main Scheduler | `scripts/run_ai_employee.py` |
-| Interactive CLI | `ai_employee.py` |
-| Task Planner | `scripts/task_planner.py` |
-| MCP Server | `mcp/business-mcp/server.py` |
-| Error Logs | `Logs/` |
-| Generated Plans | `Plans/` |
-| Vault Data | `AI_Employee_Vault/` |
-| CEO Reports | `AI_Employee_Vault/Reports/` |
-| Social Logs | `AI_Employee_Vault/Reposts/` |
-
----
-
-## 👨‍💻 Development Team
-
-**Imam Sanghaar Chandio**  
-*Lead Developer & Prompt Engineer*
-
-[📧 Email](mailto:imamsanghaar@gmail.com) · [🔗 LinkedIn](https://www.linkedin.com/in/imam-sanghaar-chandio-96780b274) · [🌐 GitHub](https://github.com/imsanghaar)
-
-**AI Contributors**
-- **Qwen Code** — Architecture & Logic Optimization
-- **Claude Code** — Agent Skills & MCP Integration
-- **Gemini CLI** — Final Verification, README Refinement & Deployment
+- **Nemat** — *Lead Architect & Visionary Developer*
+- **Gemini CLI** — *Autonomous Engineering, Deployment & Verification*
+- **Qwen Code** — *Logic Optimization & Core Architecture*
+- **Claude Code** — *Agent Skills & Protocol Integration*
 
 ---
 
 <div align="center">
 
-## 🌟 Support the Project
+**Built with ❤️ for the AI Automation Hackathon 2026**
 
-**⭐ Star this repo if you find it useful!**
-
-```bash
-git clone https://github.com/imsanghaar/Hackathon-0.git
-cd Hackathon-0
-python scripts/run_ai_employee.py --daemon
-```
-
-Built with ❤️ for the AI Automation Hackathon 2026
-
-**🏆 GOLD TIER COMPLETE**
-
-[![Tier: Bronze](https://img.shields.io/badge/Tier-Bronze-CD7F32?style=for-the-badge)](https://github.com/imsanghaar/Hackathon-0)
-[![Tier: Silver](https://img.shields.io/badge/Tier-Silver-lightgrey?style=for-the-badge)](https://github.com/imsanghaar/Hackathon-0)
-[![Tier: Gold](https://img.shields.io/badge/Tier-Gold-gold?style=for-the-badge)](https://github.com/imsanghaar/Hackathon-0)
+[![Star on GitHub](https://img.shields.io/github/stars/imsanghaar/Hackathon-0?style=social)](https://github.com/imsanghaar/Hackathon-0)
 
 </div>
