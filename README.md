@@ -128,10 +128,11 @@ python scripts/run_ai_employee.py --daemon
 
 This project is a collaborative effort between human ingenuity and advanced AI.
 
-- **Imam Sanghaar Chandio (Github User name: imsanghaar)** — *Lead Architect & Visionary Developer*
-- **Gemini CLI** — *Autonomous Engineering, Deployment & Verification*
-- **Qwen Code** — *Logic Optimization & Core Architecture*
-- **Claude Code** — *Agent Skills & Protocol Integration*
+- **[Imam Sanghaar Chandio](https://github.com/imsanghaar)** — *Lead Architect & Visionary Developer*
+- **[Gemini CLI](https://gemini.google.com)** — *Autonomous Engineering, Deployment & Verification*
+- **[Qwen Code](https://chat.qwen.ai)** — *Logic Optimization & Core Architecture*
+- **[Claude Code](https://claude.com)** — *Agent Skills & Protocol Integration*
+- **[PIAIC](www.piaic.org)** - *Hackathon Organizer ``National Level Institute``*
 
 ---
 
