@@ -36,19 +36,24 @@ The system is organized into three progressive tiers, each adding a layer of int
   - **Modular Vault**: Organized folder structure (`Inbox`, `Needs_Action`, `Done`).
   - **Task Monitoring**: Basic file system watching for incoming requests.
   - **Interactive CLI**: Command-line interface for manual task control.
-  - **Foundation Skills**: Core skills for file management and basic task execution.
 - **📁 Core Location**: [`AI_Employee_Vault/`](AI_Employee_Vault/)
+- **🚀 Run Command**:
+  ```bash
+  python ai_employee.py
+  ```
 
 ### 🥈 Silver Tier: Advanced Automation
 *Enhanced connectivity and strategic reasoning for business operations.*
 
 - **Features**:
-  - **Multi-Channel Watchers**: Monitoring Gmail and LinkedIn for incoming business opportunities.
   - **Strategic Planning**: Generation of detailed `Plan.md` files for complex task execution.
   - **LinkedIn Automation**: Automated posting to generate leads and engagement.
-  - **MCP Integration**: Model Context Protocol servers for external tool interactions.
   - **Human-in-the-Loop**: Safe approval workflows for sensitive business actions.
 - **📁 Core Locations**: [`scripts/`](scripts/), [`mcp/`](mcp/)
+- **🚀 Run Command**:
+  ```bash
+  python scripts/run_ai_employee.py --once
+  ```
 
 ### 🥇 Gold Tier: Fully Autonomous Employee
 *The pinnacle of autonomy, featuring self-healing loops and executive reporting.*
@@ -57,9 +62,11 @@ The system is organized into three progressive tiers, each adding a layer of int
   - **Ralph Wiggum Loop**: Continuous autonomous execution of multi-step task chains.
   - **Error Recovery System**: Automatic retry logic and graceful failure handling.
   - **CEO Weekly Briefing**: Automated generation of comprehensive business audit reports.
-  - **Accounting Management**: Tracking of financial records and social media logging.
-  - **Daemon Mode**: 24/7 background operation with robust logging and status tracking.
 - **📁 Core Locations**: [`.claude/skills/`](.claude/skills/), [`AI_Employee_Vault/Reports/`](AI_Employee_Vault/Reports/)
+- **🚀 Run Command**:
+  ```bash
+  python scripts/run_ai_employee.py --daemon
+  ```
 
 ---
 
@@ -121,7 +128,7 @@ python scripts/run_ai_employee.py --daemon
 
 This project is a collaborative effort between human ingenuity and advanced AI.
 
-- **Nemat** — *Lead Architect & Visionary Developer*
+- **Imam Sanghaar Chandio (Github User name: imsanghaar)** — *Lead Architect & Visionary Developer*
 - **Gemini CLI** — *Autonomous Engineering, Deployment & Verification*
 - **Qwen Code** — *Logic Optimization & Core Architecture*
 - **Claude Code** — *Agent Skills & Protocol Integration*
