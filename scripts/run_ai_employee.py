@@ -366,6 +366,176 @@ def run_task_planner() -> Dict[str, Any]:
 
 
 # =============================================================================
+# RALPH WIGGUM AUTONOMOUS LOOP INTEGRATION
+# =============================================================================
+
+def run_ralph_wiggum() -> Dict[str, Any]:
+    """
+    Run Ralph Wiggum autonomous loop on pending tasks.
+
+    Returns:
+        dict: Statistics from Ralph Wiggum loop
+    """
+    try:
+        write_log("Running Ralph Wiggum autonomous loop")
+
+        # Import Ralph Wiggum
+        sys.path.insert(0, str(SKILL_DIR / "ralph-wiggum" / "scripts"))
+        from ralph_wiggum import RalphWiggumLoop
+
+        # Create loop instance
+        loop = RalphWiggumLoop()
+
+        # Get pending tasks
+        from pathlib import Path
+        vault_dir = BASE_DIR / "AI_Employee_Vault"
+        needs_action_dir = vault_dir / "Needs_Action"
+
+        pending_tasks = list(needs_action_dir.glob("*.md")) if needs_action_dir.exists() else []
+
+        if not pending_tasks:
+            write_log("Ralph Wiggum: No pending tasks")
+            return {"tasks_processed": 0, "completed": 0, "pending_approval": 0, "failed": 0}
+
+        # Process tasks
+        stats = {
+            "tasks_processed": 0,
+            "completed": 0,
+            "pending_approval": 0,
+            "failed": 0
+        }
+
+        for task_file in pending_tasks[:5]:  # Limit to 5 tasks per cycle
+            result = loop.run_loop(task_file)
+            stats["tasks_processed"] += 1
+
+            if result.get("completed"):
+                stats["completed"] += 1
+            elif result.get("status") == "pending_approval":
+                stats["pending_approval"] += 1
+            else:
+                stats["failed"] += 1
+
+        write_log(f"Ralph Wiggum: {stats['completed']} completed, {stats['pending_approval']} pending approval")
+        return stats
+
+    except Exception as e:
+        log_error(f"Ralph Wiggum loop failed: {e}")
+        return {"tasks_processed": 0, "completed": 0, "pending_approval": 0, "failed": 0, "errors": 1}
+
+
+# =============================================================================
+# ERROR RECOVERY INTEGRATION
+# =============================================================================
+
+def run_error_recovery() -> Dict[str, Any]:
+    """
+    Run error recovery check and process retry queue.
+    
+    Returns:
+        dict: Statistics from error recovery
+    """
+    try:
+        write_log("Running error recovery check")
+        
+        # Import error handler
+        sys.path.insert(0, str(SKILL_DIR / "error-recovery" / "scripts"))
+        from error_handler import process_retry_queue, get_error_stats
+        
+        # Process retry queue
+        stats = process_retry_queue()
+        
+        # Get additional stats
+        error_stats = get_error_stats()
+        stats.update(error_stats)
+        
+        write_log(f"Error recovery: {stats.get('retried', 0)} retried, {stats.get('success', 0)} successful")
+        return stats
+        
+    except Exception as e:
+        log_error(f"Error recovery failed: {e}")
+        return {"retried": 0, "success": 0, "failed": 0, "errors": 1}
+
+
+# =============================================================================
+# CEO BRIEFING INTEGRATION
+# =============================================================================
+
+def run_ceo_briefing() -> Dict[str, Any]:
+    """
+    Run CEO weekly briefing generator.
+    Checks if it's Monday (or forced) and generates the weekly report.
+
+    Returns:
+        dict: Statistics from CEO briefing generation
+    """
+    try:
+        write_log("Checking CEO briefing schedule")
+
+        # Check schedule configuration
+        schedule_file = SKILL_DIR / "ceo-briefing" / "schedule.json"
+        should_run = False
+        schedule_info = "Not scheduled"
+
+        # Check if schedule file exists
+        if schedule_file.exists():
+            try:
+                import json
+                with open(schedule_file, 'r') as f:
+                    schedule = json.load(f)
+
+                if schedule.get('enabled', False):
+                    day_of_week = schedule.get('day_of_week', 0)  # 0 = Monday
+                    today = datetime.now().weekday()
+
+                    # Run if today is the scheduled day
+                    if today == day_of_week:
+                        should_run = True
+                        day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                        schedule_info = f"Scheduled for {day_names[day_of_week]}"
+            except Exception as e:
+                write_log(f"Error reading CEO briefing schedule: {e}")
+        else:
+            # No schedule file - check if it's Monday (default weekly run)
+            if datetime.now().weekday() == 0:  # Monday
+                should_run = True
+                schedule_info = "Default Monday schedule"
+
+        if not should_run:
+            write_log(f"CEO briefing: {schedule_info} - skipping")
+            return {"generated": False, "reason": schedule_info}
+
+        # Run CEO briefing generator
+        briefing_script = SKILL_DIR / "ceo-briefing" / "scripts" / "generate_ceo_briefing.py"
+
+        if not briefing_script.exists():
+            write_log("CEO briefing script not found")
+            return {"generated": False, "reason": "Script not found"}
+
+        result = subprocess.run(
+            [sys.executable, str(briefing_script)],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            cwd=str(BASE_DIR)
+        )
+
+        if result.returncode == 0:
+            write_log(f"CEO briefing generated successfully")
+            return {"generated": True, "output": result.stdout.strip()}
+        else:
+            write_log(f"CEO briefing failed: {result.stderr}")
+            return {"generated": False, "error": result.stderr.strip()}
+
+    except subprocess.TimeoutExpired:
+        log_error("CEO briefing timeout (120s)")
+        return {"generated": False, "error": "Timeout"}
+    except Exception as e:
+        log_error(f"CEO briefing failed: {e}")
+        return {"generated": False, "error": str(e)}
+
+
+# =============================================================================
 # GMAIL WATCHER INTEGRATION
 # =============================================================================
 
@@ -522,22 +692,43 @@ class Scheduler:
 
         print(f"\n[CYCLE {self.cycle_count}] Running at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-        # [1/3] Run vault-watcher
-        print("[1/3] Running vault-watcher...")
+        # [1/6] Run error recovery (process retry queue first)
+        print("[1/6] Running error recovery...")
+        error_stats = run_error_recovery()
+        if error_stats.get('retried', 0) > 0:
+            print(f"        Errors: {error_stats.get('retried', 0)} retried, {error_stats.get('success', 0)} successful")
+        else:
+            print(f"        Errors: No retries due")
+
+        # [2/6] Run vault-watcher
+        print("[2/6] Running vault-watcher...")
         watcher_stats = run_vault_watcher()
-        print(f"      Inbox: {watcher_stats['inbox_count']} files, {watcher_stats['new_files']} new")
+        print(f"        Inbox: {watcher_stats['inbox_count']} files, {watcher_stats['new_files']} new")
 
-        # [2/3] Run gmail-watcher (check for new emails)
-        print("[2/3] Running gmail-watcher...")
+        # [3/6] Run gmail-watcher (check for new emails)
+        print("[3/6] Running gmail-watcher...")
         gmail_stats = run_gmail_watcher()
-        print(f"      Gmail: {gmail_stats['emails_checked']} checked, {gmail_stats['tasks_created']} new tasks")
+        print(f"        Gmail: {gmail_stats['emails_checked']} checked, {gmail_stats['tasks_created']} new tasks")
 
-        # [3/3] Run task-planner
-        print("[3/3] Running task-planner...")
+        # [4/6] Run task-planner
+        print("[4/6] Running task-planner...")
         planner_stats = run_task_planner()
-        print(f"      Processed: {planner_stats['files_processed']}, Plans: {planner_stats['plans_created']}")
+        print(f"        Processed: {planner_stats['files_processed']}, Plans: {planner_stats['plans_created']}")
 
-        write_log(f"Cycle complete - Inbox: {watcher_stats['inbox_count']}, Gmail: {gmail_stats['emails_checked']}, Processed: {planner_stats['files_processed']}")
+        # [5/6] Run Ralph Wiggum autonomous loop
+        print("[5/6] Running Ralph Wiggum autonomous loop...")
+        ralph_stats = run_ralph_wiggum()
+        print(f"        Ralph: {ralph_stats['tasks_processed']} processed, {ralph_stats['completed']} completed")
+
+        # [6/6] Run CEO briefing (weekly - checks schedule internally)
+        print("[6/6] Checking CEO briefing schedule...")
+        briefing_stats = run_ceo_briefing()
+        if briefing_stats.get('generated'):
+            print(f"        CEO Briefing: Generated successfully")
+        else:
+            print(f"        CEO Briefing: {briefing_stats.get('reason', briefing_stats.get('error', 'Skipped'))}")
+
+        write_log(f"Cycle complete - Errors: {error_stats.get('retried', 0)}, Inbox: {watcher_stats['inbox_count']}, Gmail: {gmail_stats['emails_checked']}, Processed: {planner_stats['files_processed']}, Ralph: {ralph_stats['completed']} completed, CEO Briefing: {briefing_stats.get('generated', False)}")
         print(f"[CYCLE {self.cycle_count}] Complete")
     
     def run_daemon(self) -> None:

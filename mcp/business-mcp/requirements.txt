@@ -1,0 +1,15 @@
+# Business MCP Server Dependencies
+# Production-ready requirements for the business-mcp server
+
+# Official MCP Python SDK
+mcp>=1.0.0
+
+# Email support (built-in smtplib, no additional deps needed)
+
+# LinkedIn API support (built-in urllib, no additional deps needed)
+# Optional: requests library for more advanced HTTP handling
+# requests>=2.31.0
+
+# Development and testing
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0

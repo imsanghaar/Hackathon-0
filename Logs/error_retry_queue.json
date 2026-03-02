@@ -1,0 +1,10 @@
+[
+  {
+    "file_path": "E:\\ai_employee\\Hackathon-0\\AI_Employee_Vault\\Errors\\test_error_task_error_20260302_123840.md",
+    "error_message": "Test error: Simulated failure",
+    "original_location": "E:\\ai_employee\\Hackathon-0\\AI_Employee_Vault\\Inbox\\test_error_task.md",
+    "retry_time": "2026-03-02T12:43:40.478794",
+    "added_at": "2026-03-02T12:38:40.478808",
+    "retry_count": 0
+  }
+]

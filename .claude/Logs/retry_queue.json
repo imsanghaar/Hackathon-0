@@ -1,0 +1,24 @@
+{
+  "pending_retries": [
+    {
+      "filename": "test_error.md",
+      "source": "test-skill",
+      "category": "file",
+      "retry_time": "2026-03-02T13:17:42.943988",
+      "attempts": 2,
+      "max_attempts": 2,
+      "stack_trace": "Traceback (most recent call last):\n  File \"<string>\", line 11, in <module>\nFileNotFoundError: Test file not found\n",
+      "created_at": "2026-03-02T12:54:28.657448"
+    },
+    {
+      "filename": "fresh_test_task.md",
+      "source": "test_module",
+      "category": "network",
+      "retry_time": "2026-03-02T13:17:42.943988",
+      "attempts": 2,
+      "max_attempts": 2,
+      "stack_trace": "NoneType: None\n",
+      "created_at": "2026-03-02T12:59:00.913621"
+    }
+  ]
+}

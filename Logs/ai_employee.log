@@ -314,3 +314,434 @@ Exception: Failed to initialize MCP: <urlopen error [WinError 10061] No connecti
 [2026-02-28 22:17:45] Cycle complete - Inbox: 1, Gmail: 0, Processed: 1
 [2026-02-28 22:17:45] Scheduler completed once mode
 [2026-02-28 22:17:45] Scheduler lock released (PID: 8936)
+[2026-03-02 12:34:19] Scheduler lock acquired (PID: 1286)
+[2026-03-02 12:34:19] Scheduler started in once mode
+[2026-03-02 12:34:19] Starting scheduler cycle #1
+[2026-03-02 12:34:19] Running vault-watcher cycle
+[2026-03-02 12:34:19] Vault-watcher: 0 new files, 0 processed
+[2026-03-02 12:34:19] Running gmail-watcher cycle
+[2026-03-02 12:34:20] Gmail-watcher error: Traceback (most recent call last):
+  File "/usr/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/usr/lib/python3.12/http/client.py", line 1356, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1402, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1351, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1111, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1055, in send
+    self.connect()
+  File "/usr/lib/python3.12/http/client.py", line 1021, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/usr/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1373, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 421, in <module>
+    main()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 417, in main
+    watcher.run()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+
+[2026-03-02 12:34:20] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-03-02 12:34:20] Running task-planner cycle
+[2026-03-02 12:34:20] Task-planner: 0 files, 0 plans
+[2026-03-02 12:34:20] Checking CEO briefing schedule
+[2026-03-02 12:34:21] CEO briefing generated successfully
+[2026-03-02 12:34:21] Cycle complete - Inbox: 0, Gmail: 0, Processed: 0, CEO Briefing: True
+[2026-03-02 12:34:21] Scheduler completed once mode
+[2026-03-02 12:34:21] Scheduler lock released (PID: 1286)
+[2026-03-02 12:38:29] Scheduler lock acquired (PID: 8680)
+[2026-03-02 12:38:29] Scheduler started in daemon mode (interval=360s)
+[2026-03-02 12:38:29] Starting scheduler cycle #1
+[2026-03-02 12:38:29] Running vault-watcher cycle
+[2026-03-02 12:38:29] Vault-watcher: 0 new files, 0 processed
+[2026-03-02 12:38:29] Running gmail-watcher cycle
+[2026-03-02 12:38:34] Gmail-watcher error: Traceback (most recent call last):
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1321, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 870, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 855, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 487, in open
+    response = self._open(req, data)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 464, in _call_chain
+    result = func(*args)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1350, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1324, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 421, in <module>
+    main()
+    ~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 417, in main
+    watcher.run()
+    ~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+[2026-03-02 12:38:34] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-03-02 12:38:34] Running task-planner cycle
+[2026-03-02 12:38:34] Task-planner: 0 files, 0 plans
+[2026-03-02 12:38:34] Checking CEO briefing schedule
+[2026-03-02 12:38:34] CEO briefing generated successfully
+[2026-03-02 12:38:34] Cycle complete - Inbox: 0, Gmail: 0, Processed: 0, CEO Briefing: True
+[2026-03-02 12:38:34] Next cycle in 360 seconds
+[2026-03-02 12:39:30] Received signal 2, shutting down...
+[2026-03-02 12:39:31] Scheduler stopped after 1 cycles
+[2026-03-02 12:39:31] Scheduler lock released (PID: 8680)
+[2026-03-02 12:55:33] Scheduler lock acquired (PID: 1680)
+[2026-03-02 12:55:33] Scheduler started in once mode
+[2026-03-02 12:55:33] Starting scheduler cycle #1
+[2026-03-02 12:55:33] Running error recovery check
+[2026-03-02 12:55:34] Error recovery: 0 retried, 0 successful
+[2026-03-02 12:55:34] Running vault-watcher cycle
+[2026-03-02 12:55:34] Vault-watcher: 0 new files, 0 processed
+[2026-03-02 12:55:34] Running gmail-watcher cycle
+[2026-03-02 12:55:34] Gmail-watcher error: Traceback (most recent call last):
+  File "/usr/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/usr/lib/python3.12/http/client.py", line 1356, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1402, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1351, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1111, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1055, in send
+    self.connect()
+  File "/usr/lib/python3.12/http/client.py", line 1021, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/usr/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1373, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 421, in <module>
+    main()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 417, in main
+    watcher.run()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+
+[2026-03-02 12:55:34] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-03-02 12:55:34] Running task-planner cycle
+[2026-03-02 12:55:35] Task-planner: 0 files, 0 plans
+[2026-03-02 12:55:35] Checking CEO briefing schedule
+[2026-03-02 12:55:35] CEO briefing generated successfully
+[2026-03-02 12:55:35] Cycle complete - Errors: 0, Inbox: 0, Gmail: 0, Processed: 0, CEO Briefing: True
+[2026-03-02 12:55:35] Scheduler completed once mode
+[2026-03-02 12:55:35] Scheduler lock released (PID: 1680)
+[2026-03-02 13:12:42] Scheduler lock acquired (PID: 2109)
+[2026-03-02 13:12:42] Scheduler started in once mode
+[2026-03-02 13:12:42] Starting scheduler cycle #1
+[2026-03-02 13:12:42] Running error recovery check
+[2026-03-02 13:12:43] Error recovery: 2 retried, 0 successful
+[2026-03-02 13:12:43] Running vault-watcher cycle
+[2026-03-02 13:12:43] ERROR: Watcher error processing 'fresh_test_task.md': cannot import name 'create_task_file' from 'watch_inbox' (/mnt/e/ai_employee/Hackathon-0/scripts/watch_inbox.py)
+[2026-03-02 13:12:43] Vault-watcher: 1 new files, 0 processed
+[2026-03-02 13:12:43] Running gmail-watcher cycle
+[2026-03-02 13:12:43] Gmail-watcher error: Traceback (most recent call last):
+  File "/usr/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/usr/lib/python3.12/http/client.py", line 1356, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1402, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1351, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1111, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1055, in send
+    self.connect()
+  File "/usr/lib/python3.12/http/client.py", line 1021, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 852, in create_connection
+    raise exceptions[0]
+  File "/usr/lib/python3.12/socket.py", line 837, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1373, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 421, in <module>
+    main()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 417, in main
+    watcher.run()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+  File "/mnt/e/ai_employee/Hackathon-0/.claude/skills/gmail-watcher/scripts/watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+
+[2026-03-02 13:12:43] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-03-02 13:12:43] Running task-planner cycle
+[2026-03-02 13:12:44] Task-planner: 1 files, 1 plans
+[2026-03-02 13:12:44] Running Ralph Wiggum autonomous loop
+[2026-03-02 13:12:44] Ralph Wiggum: 1 completed, 0 pending approval
+[2026-03-02 13:12:44] Checking CEO briefing schedule
+[2026-03-02 13:12:44] CEO briefing generated successfully
+[2026-03-02 13:12:45] Cycle complete - Errors: 2, Inbox: 1, Gmail: 0, Processed: 1, Ralph: 1 completed, CEO Briefing: True
+[2026-03-02 13:12:45] Scheduler completed once mode
+[2026-03-02 13:12:45] Scheduler lock released (PID: 2109)
+[2026-03-02 13:12:58] Scheduler lock acquired (PID: 13364)
+[2026-03-02 13:12:58] Scheduler started in once mode
+[2026-03-02 13:12:58] Starting scheduler cycle #1
+[2026-03-02 13:12:58] Running error recovery check
+[2026-03-02 13:12:58] Error recovery: 0 retried, 0 successful
+[2026-03-02 13:12:58] Running vault-watcher cycle
+[2026-03-02 13:12:58] Vault-watcher: 0 new files, 0 processed
+[2026-03-02 13:12:58] Running gmail-watcher cycle
+[2026-03-02 13:13:02] Gmail-watcher error: Traceback (most recent call last):
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1321, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 870, in create_connection
+    raise exceptions[0]
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\socket.py", line 855, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 84, in _ensure_initialized
+    with urlopen(req, timeout=30) as resp:
+         ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 487, in open
+    response = self._open(req, data)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 464, in _call_chain
+    result = func(*args)
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1350, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nemat\AppData\Local\Programs\Python\Python314\Lib\urllib\request.py", line 1324, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 421, in <module>
+    main()
+    ~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 417, in main
+    watcher.run()
+    ~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 357, in run
+    self.navigate_to_gmail()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 208, in navigate_to_gmail
+    self.mcp.call_tool("browser_navigate", {"url": "https://mail.google.com/mail/u/0/#inbox"})
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 125, in call_tool
+    self._ensure_initialized()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ai_employee\Hackathon-0\.claude\skills\gmail-watcher\scripts\watch_gmail.py", line 88, in _ensure_initialized
+    raise Exception(f"Failed to initialize MCP: {e}")
+Exception: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+
+[2026-03-02 13:13:02] Gmail-watcher: 0 emails checked, 0 tasks created
+[2026-03-02 13:13:02] Running task-planner cycle
+[2026-03-02 13:13:02] Task-planner: 0 files, 0 plans
+[2026-03-02 13:13:02] Running Ralph Wiggum autonomous loop
+[2026-03-02 13:13:02] Ralph Wiggum: No pending tasks
+[2026-03-02 13:13:02] Checking CEO briefing schedule
+[2026-03-02 13:13:02] CEO briefing generated successfully
+[2026-03-02 13:13:02] Cycle complete - Errors: 0, Inbox: 0, Gmail: 0, Processed: 0, Ralph: 0 completed, CEO Briefing: True
+[2026-03-02 13:13:02] Scheduler completed once mode
+[2026-03-02 13:13:02] Scheduler lock released (PID: 13364)

@@ -1,3 +1,4 @@
 ## Qwen Added Memories
 - When user says "Process Tasks", I must: 1) Read all task files in Needs_Action folder, 2) Understand each task from its content, 3) Mark status as completed inside the file, 4) Move the file to Done folder, 5) Update Dashboard.md (add to Completed Tasks, remove from Pending Tasks), 6) Append an entry to System_Log.md describing what was completed. Always actually edit the files, not simulate.
 - When user says "Make a Plan for tasks", I must: 1) Read all files in Needs_Action folder, 2) Analyze what type of tasks are pending, 3) Create a new file in Plans/ named Plan_<timestamp>.md containing: Summary of pending tasks, Suggested order of execution, Risks or unclear items, A short Strategy paragraph. This is planning only - do not complete tasks.
+- Git repository for E:\ai_employee\Hackathon-0 is https://github.com/imsanghaar/Hackathon-0.git - always push here

@@ -8,3 +8,33 @@
 [2026-02-25 13:37:27] ============================================================
 [2026-02-25 13:37:27] Navigating to Gmail...
 [2026-02-25 13:37:32] ERROR: MCP call failed: Expecting value: line 1 column 1 (char 0)
+[2026-03-01 21:39:22] ============================================================
+[2026-03-01 21:39:22] GMAIL WATCHER - Starting
+[2026-03-01 21:39:22] ============================================================
+[2026-03-01 21:39:22] Navigating to Gmail...
+[2026-03-01 21:39:27] ERROR: MCP call failed: Expecting value: line 1 column 1 (char 0)
+[2026-03-02 12:34:19] ============================================================
+[2026-03-02 12:34:20] GMAIL WATCHER - Starting
+[2026-03-02 12:34:20] ============================================================
+[2026-03-02 12:34:20] Navigating to Gmail...
+[2026-03-02 12:34:20] ERROR: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+[2026-03-02 12:38:29] ============================================================
+[2026-03-02 12:38:29] GMAIL WATCHER - Starting
+[2026-03-02 12:38:29] ============================================================
+[2026-03-02 12:38:29] Navigating to Gmail...
+[2026-03-02 12:38:34] ERROR: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+[2026-03-02 12:55:34] ============================================================
+[2026-03-02 12:55:34] GMAIL WATCHER - Starting
+[2026-03-02 12:55:34] ============================================================
+[2026-03-02 12:55:34] Navigating to Gmail...
+[2026-03-02 12:55:34] ERROR: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+[2026-03-02 13:12:43] ============================================================
+[2026-03-02 13:12:43] GMAIL WATCHER - Starting
+[2026-03-02 13:12:43] ============================================================
+[2026-03-02 13:12:43] Navigating to Gmail...
+[2026-03-02 13:12:43] ERROR: Failed to initialize MCP: <urlopen error [Errno 111] Connection refused>
+[2026-03-02 13:12:58] ============================================================
+[2026-03-02 13:12:58] GMAIL WATCHER - Starting
+[2026-03-02 13:12:58] ============================================================
+[2026-03-02 13:12:58] Navigating to Gmail...
+[2026-03-02 13:13:02] ERROR: Failed to initialize MCP: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>

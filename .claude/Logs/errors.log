@@ -1,0 +1,22 @@
+[2026-03-02 12:54:28] [ERROR] [test-skill] File: test_error.md
+  Type: FileNotFoundError
+  Category: file
+  Message: Test file not found
+  Action: Moved to Errors folder
+  Stack Trace:
+Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+FileNotFoundError: Test file not found
+
+  ============================================================
+
+[2026-03-02 12:59:00] [ERROR] [test_module] File: fresh_test_task.md
+  Type: Exception
+  Category: network
+  Message: Database connection timeout
+  Action: Moved to Errors folder
+  Stack Trace:
+NoneType: None
+
+  ============================================================
+

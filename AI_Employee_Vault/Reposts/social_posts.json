@@ -1,0 +1,28 @@
+{
+  "last_updated": "2026-03-02T13:31:03.614495",
+  "total_posts": 2,
+  "posts": [
+    {
+      "id": "post_20260302132554",
+      "platform": "linkedin",
+      "content": "Excited to share our latest AI Employee System update! \ud83d\ude80 New features include autonomous task processing and error recovery. #AI #Automation #Productivity",
+      "status": "published",
+      "date": "2026-03-02",
+      "time": "13:25:54",
+      "datetime": "2026-03-02 13:25:54",
+      "timestamp": "2026-03-02T13:25:54.173886",
+      "extra_data": {}
+    },
+    {
+      "id": "post_20260302133103",
+      "platform": "linkedin",
+      "content": "Just completed implementing the Ralph Wiggum Autonomous Loop! \ud83c\udfaf Tasks are now processed automatically with safety checks. #AI #Automation",
+      "status": "published",
+      "date": "2026-03-02",
+      "time": "13:31:03",
+      "datetime": "2026-03-02 13:31:03",
+      "timestamp": "2026-03-02T13:31:03.614386",
+      "extra_data": {}
+    }
+  ]
+}
