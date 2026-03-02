@@ -1,248 +1,150 @@
 # 🤖 AI Employee System (Digital FTE)
 
 > **A Full-Time Equivalent (FTE) Digital Employee Powered by AI**  
-> An intelligent automation system that monitors folders, creates tasks, processes them with AI agents, and manages workflows automatically—working 24/7 like a real employee.
+> An autonomous automation system that monitors communication channels, creates execution plans, and processes tasks using specialized AI Agent Skills—working 24/7 with human-in-the-loop oversight.
 
-**By Imam Sanghaar Chandio & Qwen Code**
-
-[![Status](https://img.shields.io/badge/status-complete-brightgreen)](https://github.com/imsanghaar/Hackathon-0)
-[![Tier](https://img.shields.io/badge/tier-bronze%20%7C%20silver-orange)](https://github.com/imsanghaar/Hackathon-0)
-[![Python](https://img.shields.io/badge/python-3.x-blue)](https://python.org)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-### 🏷️ Tags
-
-[![status:complete](https://img.shields.io/badge/status-complete-brightgreen)](https://github.com/imsanghaar/Hackathon-0)
-[![tier:bronze](https://img.shields.io/badge/tier-bronze-orange)](https://github.com/imsanghaar/Hackathon-0)
-[![tier:silver](https://img.shields.io/badge/tier-silver-silver)](https://github.com/imsanghaar/Hackathon-0)
-[![automation](https://img.shields.io/badge/-automation-blue)](https://github.com/imsanghaar/Hackathon-0)
-[![ai-employee](https://img.shields.io/badge/-ai--employee-purple)](https://github.com/imsanghaar/Hackathon-0)
-[![digital-fte](https://img.shields.io/badge/-digital--FTE-green)](https://github.com/imsanghaar/Hackathon-0)
-[![workflow](https://img.shields.io/badge/-workflow-yellow)](https://github.com/imsanghaar/Hackathon-0)
-[![task-management](https://img.shields.io/badge/-task--management-red)](https://github.com/imsanghaar/Hackathon-0)
+[![Status: Complete](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)](https://github.com/imsanghaar/Hackathon-0)
+[![Tier: Silver](https://img.shields.io/badge/Tier-Silver-lightgrey?style=for-the-badge)](https://github.com/imsanghaar/Hackathon-0)
+[![Python: 3.8+](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge)](https://python.org)
+[![MCP: Enabled](https://img.shields.io/badge/MCP-Enabled-orange?style=for-the-badge)](https://modelcontextprotocol.io/)
 
 ---
 
-## 🚀 Quick Start
+## 📑 Overview
 
+The AI Employee System is a multi-tier automation framework designed to handle business workflows autonomously. From simple file monitoring to complex browser-based tasks like LinkedIn posting and Gmail management, the system operates through a modular "Agent Skill" architecture.
+
+### Key Capabilities
+- **Multi-Channel Monitoring:** Watches local folders and Gmail for new tasks.
+- **Strategic Planning:** Automatically generates detailed `Plan.md` files for complex requests.
+- **Browser Automation:** Uses Playwright MCP for LinkedIn posting and web-based actions.
+- **Human-in-the-Loop:** Sensitive actions require explicit human approval via the vault.
+- **Robust Scheduling:** Production-ready daemon with lock files and log rotation.
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Prerequisites
+- Python 3.8+
+- Node.js (for MCP server)
+- Chrome/Edge browser (for Playwright)
+
+### 2. Clone and Install
 ```bash
-# Clone and install
 git clone https://github.com/imsanghaar/Hackathon-0.git
 cd Hackathon-0
 pip install -r requirements.txt
-
-# Run the interactive CLI
-python ai_employee.py
 ```
 
----
-
-## 📖 Table of Contents
-
-1. [Bronze Tier](#-bronze-tier) - Core CLI & File Monitoring
-2. [Silver Tier](#-silver-tier) - Scheduler, Approval & Planning
-3. [Developers](#-developers)
-4. [Contributors](#-contributors)
-
----
-
-# 🥉 Bronze Tier
-
-> **Foundation Layer** - Interactive CLI with real-time file monitoring and task management
-
-## Overview
-
-The Bronze Tier provides the core functionality of the AI Employee System:
-
-```
-📥 Inbox → 📝 Auto-Create Tasks → 🤖 AI Processing → ✅ Done
-```
-
-## Features
-
-| Feature | Description |
-|---------|-------------|
-| **File Monitoring** | Watches Inbox/ every 5 seconds for new files |
-| **Auto Task Creation** | Creates structured task files with YAML frontmatter |
-| **Interactive CLI** | Beautiful menu-driven interface with live stats |
-| **AI Agent Integration** | Works with Claude, Gemini, Qwen via agent skills |
-| **Dashboard & Logs** | Auto-updated Dashboard.md and System_Log.md |
-| **Duplicate Prevention** | Tracks processed files to avoid duplicates |
-
-## Folder Structure
-
-```
-Hackathon-0/
-├── .claude/skills/          # AI Agent Skills
-├── Inbox/                   # 📥 Drop new files here
-├── Needs_Action/            # ⏳ Pending tasks (auto-created)
-├── Done/                    # ✅ Completed tasks (auto-moved)
-├── Logs/                    # 📝 System logs
-├── Plans/                   # 📋 Strategic plans
-│
-├── ai_employee.py           # 🎮 Main interactive CLI
-├── file_watcher.py          # 👁️ File system monitor
-├── log_manager.py           # 🔄 Log rotation
-│
-├── Dashboard.md             # 📊 Task overview
-├── System_Log.md            # 📝 Activity log
-├── Company_Handbook.md      # 📜 Guidelines
-└── README.md                # 📖 This file
-```
-
-## Usage
-
+### 3. Environment Configuration
+Copy the template and fill in your credentials for Gmail and LinkedIn:
 ```bash
-# Interactive CLI (default)
-python ai_employee.py
-
-# Live dashboard mode
-python ai_employee.py --dashboard
-
-# File watcher only
-python ai_employee.py --watch
+cp .env.example .env
+# Edit .env with your specific details
 ```
-
-### Menu Options
-
-| Key | Action | Description |
-|-----|--------|-------------|
-| `1` | 📥 View Inbox | List files in Inbox |
-| `2` | ⏳ View Tasks | View pending tasks |
-| `3` | ▶️ Process Tasks | Process with AI agent |
-| `4` | 📋 Create Plan | Generate strategic plan |
-| `5` | 📊 Dashboard | View full dashboard |
-| `6` | 📝 System Log | View activity logs |
-| `7` | 🔄 Refresh | Reload all data |
-| `q` | 🚪 Quit | Exit application |
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Company_Handbook.md](Company_Handbook.md) | System guidelines |
-| [Dashboard.md](Dashboard.md) | Current task overview |
-| [System_Log.md](System_Log.md) | Activity history |
 
 ---
 
-# 🥈 Silver Tier
+## 🥉 Bronze Tier: Core Foundation
 
-> **Advanced Automation Layer** - Production-ready scheduler with human approval and continuous monitoring
+Focuses on the interactive CLI, local file monitoring, and basic task processing.
 
-## Enhancements Over Bronze
+### Running Commands
+| Component | Command |
+| :--- | :--- |
+| **Interactive CLI** | `python ai_employee.py` |
+| **Inbox Watcher** | `python scripts/watch_inbox.py` |
+| **Live Dashboard** | `python ai_employee.py --dashboard` |
 
-| Feature | Bronze | Silver |
-|---------|--------|--------|
-| File Monitoring | ✅ Manual CLI | ✅ Daemon Scheduler |
-| Task Planning | ✅ Basic | ✅ Strategic Plans |
-| Human Approval | ❌ | ✅ Approval Workflow |
-| Continuous Run | ❌ | ✅ 6-min Intervals |
-| Lock File | ❌ | ✅ Prevents Duplicates |
-| Log Rotation | ✅ Basic | ✅ 4MB Auto-Archive |
+---
 
-## New Features
+## 🥈 Silver Tier: Advanced Automation
 
-| Feature | Description |
-|---------|-------------|
-| **Scheduler Daemon** | Runs watcher + planner in configurable loops (default 6 min) |
-| **Human Approval** | Tasks require "Status: Approved" before execution |
-| **Task Planner** | Analyzes files and creates step-by-step execution plans |
-| **Lock File System** | Prevents duplicate scheduler instances |
-| **Log Rotation** | Auto-archives logs at 4MB to prevent bloat |
-| **Cross-Platform** | Windows, Linux, Mac support |
+The Silver Tier introduces long-running background processes, external integrations, and strategic reasoning.
 
-## Silver Tier Commands
-
+### 1. Start the MCP Server (Crucial)
+The Silver Tier requires the Playwright MCP server for all browser-based operations:
 ```bash
-# Check scheduler status
-python scripts/run_ai_employee.py --status
-
-# Run single cycle
-python scripts/run_ai_employee.py --once
-
-# Daemon mode (continuous)
-python scripts/run_ai_employee.py --daemon
-
-# Custom interval (5 minutes)
-python scripts/run_ai_employee.py --daemon --interval 300
-
-# Force start (ignore lock)
-python scripts/run_ai_employee.py --daemon --force
+npx @playwright/mcp@latest --port 8808 --shared-browser-context &
 ```
 
-## Silver Tier Scripts
+### 2. Silver Tier Components & Running Commands
 
-| Script | Description |
-|--------|-------------|
-| `scripts/run_ai_employee.py` | Main scheduler daemon |
-| `scripts/watch_inbox.py` | Vault Inbox watcher |
-| `scripts/task_planner.py` | Task analyzer & planner |
-| `scripts/requests-approval.py` | Approval status checker |
-| `scripts/test_implementations.py` | Test suite |
+| Component | Description | Command |
+| :--- | :--- | :--- |
+| **Production Scheduler** | Runs the main autonomous loop (watcher + planner). | `python scripts/run_ai_employee.py --daemon` |
+| **Gmail Watcher** | Monitors your inbox and creates tasks from new emails. | `python .claude/skills/gmail-watcher/scripts/watch_gmail.py --watch` |
+| **LinkedIn Automator** | Handles automated posting to LinkedIn for lead generation. | `python .claude/skills/linkedin-post/scripts/linkedin_auto.py` |
+| **Approval Checker** | Monitors the vault for human approvals/rejections. | `python scripts/requests-approval.py --timeout 7200` |
+| **Task Planner** | Analyzes inbox and creates step-by-step Plan.md files. | `python scripts/task_planner.py` |
 
-## Silver Tier Documentation
+### 3. How to Run the Watchers
 
-| Document | Description |
-|----------|-------------|
-| [SILVER_TIER_VERIFICATION.md](SILVER_TIER_VERIFICATION.md) | Requirements checklist |
-| [MCP_INTEGRATION.md](MCP_INTEGRATION.md) | MCP server setup |
-| [scripts/tests.md](scripts/tests.md) | Test results |
+#### **Gmail Watcher**
+The Gmail watcher uses Playwright to check your emails. It can run as a standalone service:
+```bash
+# Continuous monitoring every 5 minutes
+python .claude/skills/gmail-watcher/scripts/watch_gmail.py --watch --interval 300
+```
+
+#### **LinkedIn Automator (Poster)**
+While the scheduler can trigger it, you can run a post manually:
+```bash
+# Execute a LinkedIn post immediately
+python .claude/skills/linkedin-post/scripts/linkedin_auto.py --text "Your post content here"
+```
+
+#### **Vault Inbox Watcher**
+Monitors the `AI_Employee_Vault/Inbox` folder for new markdown files:
+```bash
+python scripts/watch_inbox.py
+```
 
 ---
 
-## 🤖 Agent Skills
+## 🛠️ Architecture: Agent Skills
 
-Agent Skills are documented behaviors for AI agents to interact with the vault system.
+All AI functionality is decoupled into "Skills" located in `.claude/skills/`. Each skill includes a `SKILL.md` defining its behavior and a Python script for execution.
 
-| Skill | Trigger | Action |
-|-------|---------|--------|
-| **Process Tasks** | `"Process Tasks"` | Complete tasks, update Dashboard & Log |
-| **Make a Plan** | `"Make a Plan for tasks"` | Create strategic planning document |
-
-Skills located in `.claude/skills/` with detailed `SKILL.md` documentation.
+| Skill | Purpose |
+| :--- | :--- |
+| `gmail-watcher` | Monitors Gmail for task-related emails. |
+| `linkedin-post` | Automates LinkedIn content publishing. |
+| `task-planner` | Creates step-by-step execution plans. |
+| `human-approval` | Manages the approval/rejection workflow. |
+| `vault-file-manager` | Handles file movements across tiers. |
 
 ---
 
-## 👨‍💻 Developers
+## 📊 Documentation & Monitoring
 
-### Lead Developer
+- **[Dashboard.md](Dashboard.md):** Real-time overview of task statistics and system health.
+- **[Company_Handbook.md](Company_Handbook.md):** Operational guidelines for the AI Employee.
+- **[MCP_INTEGRATION.md](MCP_INTEGRATION.md):** Detailed guide for the Model Context Protocol setup.
+- **[System_Log.md](System_Log.md):** Chronological log of all autonomous actions.
+
+---
+
+## 👨‍💻 Development Team
 
 **Imam Sanghaar Chandio**  
-*Prompt Engineer, Web Developer*
+*Lead Developer & Prompt Engineer*
 
 - 📧 imamsanghaar@gmail.com
 - 🔗 [LinkedIn](https://www.linkedin.com/in/imam-sanghaar-chandio-96780b274)
 - 🌐 [GitHub](https://github.com/imsanghaar)
-- 💼 [Portfolio](https://imsanghaar.vercel.app)
 
----
-
-## 🤝 Contributors
-
-| Name | Role | Links |
-|------|------|-------|
-| **Imam Sanghaar Chandio** | Creator & Lead Developer | [GitHub](https://github.com/imsanghaar) • [LinkedIn](https://www.linkedin.com/in/imam-sanghaar-chandio-96780b274) |
-| **Qwen Code** | AI Development Assistant | [Alibaba Cloud](https://www.alibabacloud.com/) |
-| **Claude Code** | AI Development Assistant | [Anthropic](https://www.anthropic.com/) |
-
----
-
-## 🏆 Status
-
-**Bronze Tier:** ✅ Complete  
-**Silver Tier:** ✅ Complete
-
-**Last Updated:** February 28, 2026
+**AI Contributors**
+- **Qwen Code:** Architecture & Logic Optimization
+- **Claude Code:** Agent Skills & MCP Integration
+- **Gemini CLI:** Final Verification, README Refinement & Deployment
 
 ---
 
 <div align="center">
 
-**⭐ Star this repo if you find it useful!**
-
-Built with ❤️ by Imam Sanghaar Chandio, Qwen Code & Claude Code
-
-[Report Bug](https://github.com/imsanghaar/Hackathon-0/issues) · [Request Feature](https://github.com/imsanghaar/Hackathon-0/issues)
+**⭐ Star this repo if you find it useful!**  
+Built with ❤️ for the AI Automation Hackathon 2026.
 
 </div>
